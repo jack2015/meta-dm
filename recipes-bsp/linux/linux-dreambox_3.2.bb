@@ -1,4 +1,4 @@
-MACHINE_KERNEL_PR_append = ".${INC_PR}.70"
+MACHINE_KERNEL_PR_append = ".${INC_PR}.71"
 
 COMPATIBLE_MACHINE = "dm500hd|dm500hdv2|dm800se|dm800sev2|dm7020hd|dm7020hdv2|dm8000"
 
@@ -38,8 +38,7 @@ SRC_URI = " \
 			file://0001-dvb_frontend-backport-multistream-support.patch \
 			file://0008-MIPS-Fix-build-with-binutils-2.24.51.patch \
 			file://0010-BRCMSTB-Fix-build-with-binutils-2.24.51.patch \
-			file://0001-Revert-cpuset-PF_SPREAD_PAGE-and-PF_SPREAD_SLAB-shou.patch \
-			file://0002-Revert-sched-add-macros-to-define-bitops-for-task-at.patch \
+			file://0001-move-field-atomic-flags-to-the-bottom-of-structure.patch \
 "
 
 SRC_URI[kernel.md5sum] = "7ceb61f87c097fc17509844b71268935"
