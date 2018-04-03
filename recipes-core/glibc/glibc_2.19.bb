@@ -31,6 +31,7 @@ SRC_URI = "http://downloads.yoctoproject.org/releases/eglibc/eglibc-${PV}-svnr25
            file://0001-ptrace-protect-ptrace_peeksiginfo_args-from-redefint.patch \
            file://0002-fix-build-for-old-libcheader.patch \
            file://nscd-no-bash.patch \
+           file://gracefully_handle_incompatible_locale_data.patch \
           "
 SRC_URI[md5sum] = "197836c2ba42fb146e971222647198dd"
 SRC_URI[sha256sum] = "baaa030531fc308f7820c46acdf8e1b2f8e3c1f40bcd28b6e440d1c95d170d4c"
