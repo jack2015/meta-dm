@@ -27,7 +27,6 @@ SRC_URI_append_dm900 += " \
 SRC_URI_append_dm920 += " \
     file://add-skin_display-dm9x0.patch \
     file://dm9x0-recoverymode.patch \
-    file://try-to-support-2160p60.patch \
 "
 
 SRC_URI_append_dm8000 += " \
