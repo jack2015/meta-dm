@@ -23,12 +23,14 @@ SRC_URI_append_dm900 += " \
     file://add-skin_display-dm9x0.patch \
     file://dm9x0-recoverymode.patch \
     file://add-support-2160p.patch \
+    file://make-front-led-configurable.patch \
 "
 
 SRC_URI_append_dm920 += " \
     file://add-skin_display-dm9x0.patch \
     file://dm9x0-recoverymode.patch \
     file://add-support-2160p.patch \
+    file://make-front-led-configurable.patch \
 "
 
 SRC_URI_append_dm8000 += " \
