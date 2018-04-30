@@ -1,8 +1,8 @@
-diff --git a/data/skin_display-dm900.xml b/data/skin_display-dm900.xml
+diff --git a/data/skin_display_dm900.xml b/data/skin_display_dm900.xml
 new file mode 100644
 index 000000000..987ea7248
 --- /dev/null
-+++ b/data/skin_display-dm900.xml
++++ b/data/skin_display_dm900.xml
 @@ -0,0 +1,381 @@
 +<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 +<skin>
@@ -385,11 +385,11 @@ index 000000000..987ea7248
 +		<panel name="SummaryClockPanel" />
 +	</screen>
 +</skin>
-diff --git a/data/skin_display-dm920.xml b/data/skin_display-dm920.xml
+diff --git a/data/skin_display_dm920.xml b/data/skin_display_dm920.xml
 new file mode 100644
 index 000000000..987ea7248
 --- /dev/null
-+++ b/data/skin_display-dm920.xml
++++ b/data/skin_display_dm920.xml
 @@ -0,0 +1,381 @@
 +<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 +<skin>
