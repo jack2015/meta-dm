@@ -37,8 +37,6 @@ SRC_URI_append_dm920 += " \
     file://move-lcd-text-a-bit-to-the-right.patch \
 "
 
-"
-
 SRC_URI_append_dm8000 += " \
     file://fix-wrong-driver-date.patch \
 "
