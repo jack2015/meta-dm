@@ -26,7 +26,8 @@ SRC_URI_append_dm900 += " \
     file://make-front-led-configurable.patch \
     file://adapt-res-to-dm9x0-display.patch \
     file://move-lcd-text-a-bit-to-the-right.patch \
- "
+    file://fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
+"
 
 SRC_URI_append_dm920 += " \
     file://add-skin_display-dm9x0.patch \
@@ -35,6 +36,7 @@ SRC_URI_append_dm920 += " \
     file://make-front-led-configurable.patch \
     file://adapt-res-to-dm9x0-display.patch \
     file://move-lcd-text-a-bit-to-the-right.patch \
+    file://fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
 "
 
 SRC_URI_append_dm8000 += " \
