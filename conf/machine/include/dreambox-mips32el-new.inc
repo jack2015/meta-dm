@@ -1,9 +1,6 @@
 # dreambox-mips32el-new.inc
 
-PREFERRED_PROVIDER_virtual/egl ?= "libvc5dream"
 PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
-PREFERRED_PROVIDER_virtual/libgles1 ?= "libvc5dream"
-PREFERRED_PROVIDER_virtual/libgles2 ?= "libvc5dream"
 PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
 PREFERRED_VERSION_linux-dreambox = "3.4"
 PREFERRED_VERSION_gnupg ?= "2.1.18"
