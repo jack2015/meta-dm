@@ -36,8 +36,6 @@ SRC_URI = " \
 			file://0001-misc-latin1-to-utf8-conversions.patch \
 			file://defconfig \
 			file://0001-dvb_frontend-backport-multistream-support.patch \
-			file://0008-MIPS-Fix-build-with-binutils-2.24.51.patch \
-			file://0010-BRCMSTB-Fix-build-with-binutils-2.24.51.patch \
 			file://move-atomic-flags-field-after-cputime-expires-field.patch \
 			file://remove-duplicate-tcp-filter-hook-in-ipv6.patch \
 "
