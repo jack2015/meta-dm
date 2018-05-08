@@ -36,7 +36,6 @@ MACHINE_EXTRA_RRECOMMENDS = " \
     kernel-module-exportfs \
     kernel-module-snd-oss \
     kernel-module-snd-pcm-oss \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'v3d', 'libvc5dream', '',d)} \
     "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
@@ -52,14 +51,10 @@ MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff blindscan-dvbs"
 MACHINEOVERRIDES .= ":dreambox"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
-PREFERRED_PROVIDER_virtual/kodi = "stb-kodi-${MACHINE}"
 PREFERRED_PROVIDER_virtual/blindscan-dvbs = "dreambox-blindscan-utils"
 PREFERRED_PROVIDER_virtual/blindscan-dvbc = "dreambox-blindscan-utils"
 PREFERRED_VERSION_linux-dreambox ?= "3.14"
 PREFERRED_VERSION_nfs-utils ?= "1.3.4"
-PREFERRED_PROVIDER_virtual/egl ?= "libvc5dream"
-PREFERRED_PROVIDER_virtual/libgles1 ?= "libvc5dream"
-PREFERRED_PROVIDER_virtual/libgles2 ?= "libvc5dream"
 PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
 PREFERRED_VERSION_linux-dreambox = "3.14"
