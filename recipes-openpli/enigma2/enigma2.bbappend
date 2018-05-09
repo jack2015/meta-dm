@@ -9,8 +9,6 @@ SRC_URI_append_dm800 += " \
     file://fix-wrong-driver-date.patch \
 "
 
-inherit upx_compress
-
 SRC_URI_append += " \
 	${@bb.utils.contains("MACHINE_FEATURES", "dreambox", "\
 	file://use-ioctl-22-for-h265.patch \
