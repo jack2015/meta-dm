@@ -215,25 +215,26 @@ index 000000000..3af51b418
 +
 +#endif /* _UAPI_LINUX_ION_H */
 diff --git a/lib/gdi/fb.cpp b/lib/gdi/fb.cpp
-index 66c1e5e56..97265c27d 100644
+index 66c1e5e56..72a1bc54f 100644
 --- a/lib/gdi/fb.cpp
 +++ b/lib/gdi/fb.cpp
-@@ -13,7 +13,13 @@
+@@ -13,10 +13,11 @@
  #define FBIO_WAITFORVSYNC _IOW('F', 0x20, uint32_t)
  #endif
  
 -#ifndef FBIO_BLIT
+-#define FBIO_SET_MANUAL_BLIT _IOW('F', 0x21, __u8)
+-#define FBIO_BLIT 0x22
+-#endif
 +#include <lib/gdi/accel.h>
 +#include <interfaces/ion.h>
 +#define ION_HEAP_TYPE_BMEM      (ION_HEAP_TYPE_CUSTOM + 1)
 +#define ION_HEAP_ID_MASK        (1 << ION_HEAP_TYPE_BMEM)
 +#define ACCEL_MEM_SIZE          (32*1024*1024)
-+
-+#ifndef FBIO_BLIT
- #define FBIO_SET_MANUAL_BLIT _IOW('F', 0x21, __u8)
- #define FBIO_BLIT 0x22
- #endif
-@@ -39,6 +45,8 @@ fbClass::fbClass(const char *fb)
+ 
+ fbClass *fbClass::instance;
+ 
+@@ -39,6 +40,8 @@ fbClass::fbClass(const char *fb)
  	cmap.blue=blue;
  	cmap.transp=trans;
  
@@ -242,7 +243,7 @@ index 66c1e5e56..97265c27d 100644
  	fbFd=open(fb, O_RDWR);
  	if (fbFd<0)
  	{
-@@ -64,10 +72,81 @@ fbClass::fbClass(const char *fb)
+@@ -64,10 +67,81 @@ fbClass::fbClass(const char *fb)
  	m_phys_mem = fix.smem_start;
  	eDebug("[fb] %s: %dk video mem", fb, available/1024);
  	lfb=(unsigned char*)mmap(0, available, PROT_WRITE|PROT_READ, MAP_SHARED, fbFd, 0);
@@ -310,7 +311,7 @@ index 66c1e5e56..97265c27d 100644
 +		{
 +			close(m_accel_fd);
 +			eDebug("mmap lfb failed");
-+err_ioc_free:
++			err_ioc_free:
 +			eFatal("failed to allocate accel memory via ION!!!");
 +			m_accel_fd = -1;
 +			memset(&free_data, 0, sizeof(free_data));
@@ -327,7 +328,7 @@ index 66c1e5e56..97265c27d 100644
  	}
  
  	showConsole(0);
-@@ -100,6 +179,11 @@ int fbClass::showConsole(int state)
+@@ -100,6 +174,11 @@ int fbClass::showConsole(int state)
  
  int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
  {
@@ -339,7 +340,7 @@ index 66c1e5e56..97265c27d 100644
  	if (fbFd < 0) return -1;
  	screeninfo.xres_virtual=screeninfo.xres=nxRes;
  	screeninfo.yres_virtual=(screeninfo.yres=nyRes)*2;
-@@ -167,6 +251,12 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
+@@ -167,6 +246,12 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
  		eDebug("[fb] FBIOGET_FSCREENINFO: %m");
  	}
  	stride=fix.line_length;
@@ -352,7 +353,19 @@ index 66c1e5e56..97265c27d 100644
  	memset(lfb, 0, stride*yRes);
  	blit();
  	return 0;
-@@ -252,21 +342,9 @@ void fbClass::unlock()
+@@ -196,11 +281,6 @@ int fbClass::waitVSync()
+ 
+ void fbClass::blit()
+ {
+-	if (fbFd < 0) return;
+-	if (m_manual_blit == 1) {
+-		if (ioctl(fbFd, FBIO_BLIT) < 0)
+-			eDebug("[fb] FBIO_BLIT: %m");
+-	}
+ }
+ 
+ fbClass::~fbClass()
+@@ -252,21 +332,9 @@ void fbClass::unlock()
  
  void fbClass::enableManualBlit()
  {
@@ -374,41 +387,6 @@ index 66c1e5e56..97265c27d 100644
 -		m_manual_blit = 0;
  }
  
-diff --git a/lib/gdi/gfbdc.cpp b/lib/gdi/gfbdc.cpp
-index 588e5723a..7147f775b 100644
---- a/lib/gdi/gfbdc.cpp
-+++ b/lib/gdi/gfbdc.cpp
-@@ -11,8 +11,6 @@ gFBDC::gFBDC()
- {
- 	fb=new fbClass;
- 
--	if (!fb->Available())
--		eFatal("[gFBDC] no framebuffer available");
- 
- 	int xres;
- 	int yres;
-@@ -180,8 +180,6 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
- 	if (m_pixmap && (surface.x == xres) && (surface.y == yres) && (surface.bpp == bpp))
- 		return;
- 
--	if (gAccel::getInstance())
--		gAccel::getInstance()->releaseAccelMemorySpace();
- 
- 	fb->SetMode(xres, yres, bpp);
- 
-@@ -209,11 +209,8 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
- 		surface_back.data_phys = 0;
- 	}
- 
--	eDebug("[gFBDC] resolution: %dx%dx%d stride=%d, %dkB available for acceleration surfaces.",
--		 surface.x, surface.y, surface.bpp, fb->Stride(), (fb->Available() - fb_size)/1024);
-+	eDebug("[gFBDC] resolution: %d x %d x %d (stride: %d)", surface.x, surface.y, surface.bpp, fb->Stride());
- 
--	if (gAccel::getInstance())
--		gAccel::getInstance()->setAccelMemorySpace(fb->lfb + fb_size, surface.data_phys + fb_size, fb->Available() - fb_size);
- 
- 	if (!surface.clut.data)
- 	{
 diff --git a/lib/gdi/fb.h b/lib/gdi/fb.h
 index 0eb04915d..a4fdb8522 100644
 --- a/lib/gdi/fb.h
@@ -421,6 +399,41 @@ index 0eb04915d..a4fdb8522 100644
  	void enableManualBlit();
  	void disableManualBlit();
  	int showConsole(int state);
+diff --git a/lib/gdi/gfbdc.cpp b/lib/gdi/gfbdc.cpp
+index 588e5723a..e7a9d5af6 100644
+--- a/lib/gdi/gfbdc.cpp
++++ b/lib/gdi/gfbdc.cpp
+@@ -11,8 +11,6 @@ gFBDC::gFBDC()
+ {
+ 	fb=new fbClass;
+ 
+-	if (!fb->Available())
+-		eFatal("[gFBDC] no framebuffer available");
+ 
+ 	int xres;
+ 	int yres;
+@@ -180,8 +178,6 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
+ 	if (m_pixmap && (surface.x == xres) && (surface.y == yres) && (surface.bpp == bpp))
+ 		return;
+ 
+-	if (gAccel::getInstance())
+-		gAccel::getInstance()->releaseAccelMemorySpace();
+ 
+ 	fb->SetMode(xres, yres, bpp);
+ 
+@@ -209,11 +205,8 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
+ 		surface_back.data_phys = 0;
+ 	}
+ 
+-	eDebug("[gFBDC] resolution: %dx%dx%d stride=%d, %dkB available for acceleration surfaces.",
+-		 surface.x, surface.y, surface.bpp, fb->Stride(), (fb->Available() - fb_size)/1024);
++	eDebug("[gFBDC] resolution: %d x %d x %d (stride: %d)", surface.x, surface.y, surface.bpp, fb->Stride());
+ 
+-	if (gAccel::getInstance())
+-		gAccel::getInstance()->setAccelMemorySpace(fb->lfb + fb_size, surface.data_phys + fb_size, fb->Available() - fb_size);
+ 
+ 	if (!surface.clut.data)
+ 	{
 -- 
 2.17.0
 
