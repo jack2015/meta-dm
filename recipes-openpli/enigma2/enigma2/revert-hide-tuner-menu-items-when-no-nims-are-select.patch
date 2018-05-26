@@ -1,7 +1,7 @@
 commit:
 https://github.com/OpenPLi/enigma2/commit/cc5162f4cd80e2c23a7379785ea0b02ee28d52b3
 triggers the triple tuner configuration bug which we still have in Enigma2.
-nimmanager.somethingConnected() returns alway False and due to that users have no menu option like Fast Scan,
+nimmanager.somethingConnected() returns always False and due to that users have no menu option like Fast Scan,
 Automatic scan, Manual scan, Positioner setup and signalfinder.
 
 diff --git a/data/menu.xml b/data/menu.xml
