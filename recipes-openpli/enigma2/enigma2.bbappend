@@ -26,6 +26,7 @@ SRC_URI_append_dm900 += " \
     file://move-lcd-text-a-bit-to-the-right.patch \
     file://fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
     file://add-extra-hdr-options.patch \
+    file://revert-hide-tuner-menu-items-when-no-nims-are-select.patch \
 "
 
 SRC_URI_append_dm920 += " \
@@ -37,6 +38,11 @@ SRC_URI_append_dm920 += " \
     file://move-lcd-text-a-bit-to-the-right.patch \
     file://fix-framebuffer-and-use-ion-to-allocate-accel-memory.patch \
     file://add-extra-hdr-options.patch \
+    file://revert-hide-tuner-menu-items-when-no-nims-are-select.patch \
+"
+
+SRC_URI_append_dm820 += " \
+    file://revert-hide-tuner-menu-items-when-no-nims-are-select.patch \
 "
 
 SRC_URI_append_dm8000 += " \
