@@ -10,10 +10,7 @@ PV = "${BINARY_VERSION}"
 
 S = "${WORKDIR}"
 
-PRECOMPILED_ARCH = "${MACHINE}"
-PRECOMPILED_ARCH_dm7020hdv2 = "dm7020hd"
-
-SRC_URI = "http://dreamboxupdate.com/download/opendreambox/2.0.0/dreambox-bootlogo/dreambox-bootlogo_${BINARY_VERSION}_${PRECOMPILED_ARCH}.tar.bz2;name=${PRECOMPILED_ARCH}"
+SRC_URI = "http://dreamboxupdate.com/download/opendreambox/2.0.0/dreambox-bootlogo/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}.tar.bz2;name=${MACHINE}"
 SRC_URI_append_dm800 = " file://dm800-logo.jpg"
 
 SRC_URI[dm800.md5sum] = "0aacd07cc4d19b388c6441b007e3525a"
@@ -33,12 +30,12 @@ SRC_URI[dm500hdv2.sha256sum] = "005b9e99566fdee4d76ec1532273dc3e29a14b723d0bf610
 
 do_install() {
     install -d ${D}/boot
-    install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${PRECOMPILED_ARCH}/bootlogo-${PRECOMPILED_ARCH}.elf.gz ${D}/boot/
-    if [ "${PRECOMPILED_ARCH}" == "dm800" ]
+    install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
+    if [ "${MACHINE}" == "dm800" ]
     then
-        install -m 0755 ${S}/dm800-logo.jpg ${D}/boot/bootlogo-${PRECOMPILED_ARCH}.jpg
+        install -m 0755 ${S}/dm800-logo.jpg ${D}/boot/bootlogo-${MACHINE}.jpg
     else
-        install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${PRECOMPILED_ARCH}/bootlogo-${PRECOMPILED_ARCH}.jpg ${D}/boot/
+        install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.jpg ${D}/boot/
     fi
 }
 
