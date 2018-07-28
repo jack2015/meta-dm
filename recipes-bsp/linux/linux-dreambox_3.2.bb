@@ -1,4 +1,4 @@
-MACHINE_KERNEL_PR_append = ".${INC_PR}.75"
+MACHINE_KERNEL_PR_append = ".${INC_PR}.76"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -10,36 +10,36 @@ SRC_URI = " \
 			${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-3.2.tar.bz2;name=kernel \
 			${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-3.2.${PATCHLEVEL}.xz;apply=yes;name=kernel-patch \
 			http://download.filesystems.org/unionfs/unionfs-2.x-latest/unionfs-2.6_for_3.2.62.diff.gz;name=unionfs \
-			file://linux-dreambox-kernel.patch \
-			file://change-function-to-setattr-prepare.patch \
-			file://clear_sublevel.patch \
-			file://0001-Revert-MIPS-Fix-potencial-corruption.patch \
-			file://fadvise_dontneed_change.patch \
-			file://fix-proc-cputype.patch \
-			file://rtl8712-backport-b.patch \
-			file://rtl8712-backport-c.patch \
-			file://rtl8712-backport-d.patch \
-			file://make-3.82-hack.patch \
-			file://0001-brmcnand_base-disable-flash-BBT-on-64MB-nand.patch \
-			file://0002-ubifs-add-config-option-to-use-zlib-as-default-compr.patch \
-			file://em28xx_fix_terratec_entries.patch \
-			file://em28xx_add_terratec_h5_rev3.patch \
-			file://dvb-usb-siano-always-load-smsdvb.patch \
-			file://dvb-usb-af9035.patch \
-			file://dvb-usb-a867.patch \
-			file://dvb-usb-rtl2832.patch \
-			file://dvb_usb_disable_rc_polling.patch \
-			file://dvb-usb-smsdvb_fix_frontend.patch \
-			file://0001-it913x-backport-changes-to-3.2-kernel.patch \
-			file://rtl8712-fix-warnings.patch \
-			file://fixme-hardfloat.patch \
-			file://0001-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \
-			file://kernel-add-support-for-gcc6.patch \
-			file://0001-misc-latin1-to-utf8-conversions.patch \
+			file://001-linux-dreambox-kernel.patch \
+			file://002-remove-duplicate-tcp-filter-hook-in-ipv6.patch \
+			file://003-change-function-to-setattr-prepare.patch \
+			file://004-clear_sublevel.patch \
+			file://005-Revert-MIPS-Fix-potencial-corruption.patch \
+			file://006-fadvise_dontneed_change.patch \
+			file://007-fix-proc-cputype.patch \
+			file://008-misc-latin1-to-utf8-conversions.patch \
+			file://009-rtl8712-backport-b.patch \
+			file://010-rtl8712-backport-c.patch \
+			file://011-rtl8712-backport-d.patch \
+			file://012-make-3.82-hack.patch \
+			file://013-brmcnand_base-disable-flash-BBT-on-64MB-nand.patch \
+			file://014-ubifs-add-config-option-to-use-zlib-as-default-compr.patch \
+			file://015-em28xx_fix_terratec_entries.patch \
+			file://016-em28xx_add_terratec_h5_rev3.patch \
+			file://017-dvb-usb-siano-always-load-smsdvb.patch \
+			file://018-dvb-usb-af9035.patch \
+			file://019-dvb-usb-a867.patch \
+			file://020-dvb-usb-rtl2832.patch \
+			file://021-dvb_usb_disable_rc_polling.patch \
+			file://022-dvb-usb-smsdvb_fix_frontend.patch \
+			file://023-it913x-backport-changes-to-3.2-kernel.patch \
+			file://024-rtl8712-fix-warnings.patch \
+			file://025-fixme-hardfloat.patch \
+			file://026-correctly-initiate-nand-flash-ecc-config-when-old-2n.patch \
+			file://027-kernel-add-support-for-gcc6.patch \
+			file://028-move-atomic-flags-field-after-cputime-expires-field.patch \
+			file://029-dvb_frontend-backport-multistream-support.patch \
 			file://defconfig \
-			file://0001-dvb_frontend-backport-multistream-support.patch \
-			file://move-atomic-flags-field-after-cputime-expires-field.patch \
-			file://remove-duplicate-tcp-filter-hook-in-ipv6.patch \
 "
 
 SRC_URI[kernel.md5sum] = "7ceb61f87c097fc17509844b71268935"
