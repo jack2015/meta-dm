@@ -18,7 +18,7 @@ DREAMBOX_IMAGE_SIZE ??= "1024"
 
 IMAGE_FSTYPES =+ "tar.xz"
 
-IMAGE_CMD_tar_prepend = " \
+IMAGE_CMD_tar_prepend = "\
     mkdir -p ${IMAGE_ROOTFS}/tmp; \
     mkdir -p ${IMAGE_ROOTFS}/var/lib/opkg/info; \
     echo "#!/bin/sh" > ${IMAGE_ROOTFS}/var/lib/opkg/info/dreambox-secondstage.postinst; \
@@ -27,7 +27,7 @@ IMAGE_CMD_tar_prepend = " \
     rm -f ${DEPLOY_DIR_IMAGE}/.tar.xz; \
     "
 
-IMAGE_CMD_tar_append = " ; \
+IMAGE_CMD_tar_append = "\
     cd ${DEPLOY_DIR_IMAGE}; \
     rm -f *.rootfs.manifest; \
     rm -f .manifest; \

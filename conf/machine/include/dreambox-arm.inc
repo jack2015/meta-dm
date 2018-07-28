@@ -23,7 +23,7 @@ DVBMEDIASINK_CONFIG = "--with-pcm --with-wma --with-wmv --with-dts=no --with-dts
 require conf/machine/include/soc-family.inc
 require conf/machine/include/tune-cortexa15.inc
 
-MACHINE_EXTRA_RRECOMMENDS = " \
+MACHINE_EXTRA_RRECOMMENDS += "\
     gstreamer1.0-plugin-dvbmediasink \
     gstreamer1.0-libav \
     kernel-module-cifs \
@@ -74,7 +74,7 @@ IMAGEDIR = "${MACHINE}"
 IMAGEVERSION := "${DISTRO_NAME}-${DISTRO_VERSION}-${DATE}"
 IMAGEVERSION[vardepsexclude] = "DATE"
 
-IMAGE_CMD_tar_prepend = " \
+IMAGE_CMD_tar_prepend = "\
     mkdir -p ${IMAGE_ROOTFS}/tmp; \
     mkdir -p ${IMAGE_ROOTFS}/var/lib/opkg/info; \
     mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
@@ -93,7 +93,7 @@ IMAGE_CMD_tar_prepend = " \
     rm -Rf ${IMAGEDIR}; \
     "
 
-IMAGE_CMD_tar_append = " ; \
+IMAGE_CMD_tar_append = "\
     cd ${DEPLOY_DIR_IMAGE}; \
     rm -f *.rootfs.manifest; \
     rm -f .manifest; \

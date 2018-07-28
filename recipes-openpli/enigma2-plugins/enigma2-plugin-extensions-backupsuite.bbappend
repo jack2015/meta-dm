@@ -1,4 +1,4 @@
-RDEPENDS_${PN} = " \
+RDEPENDS_${PN} = "\
 	mtd-utils \
 	mtd-utils-ubifs \
 	${@bb.utils.contains("IMAGE_FSTYPES", "tar.bz2", "bzip2" , "", d)} \

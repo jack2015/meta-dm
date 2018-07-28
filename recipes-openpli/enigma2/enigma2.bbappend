@@ -1,15 +1,15 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PYTHON_RDEPS += " \
+PYTHON_RDEPS += "\
 	python-service-identity \
 "
 
-SRC_URI_append_dm800 += " \
+SRC_URI_append_dm800 += "\
     file://e2_old_dvbapi.patch \
     file://fix-wrong-driver-date.patch \
 "
 
-SRC_URI_append += " \
+SRC_URI_append += "\
 	${@bb.utils.contains("MACHINE_FEATURES", "dreambox", "\
 	file://use-ioctl-22-for-h265.patch \
 	file://fix-fp-version.patch \
@@ -17,7 +17,7 @@ SRC_URI_append += " \
 	", "", d)} \
 "
 
-SRC_URI_append_dm900 += " \
+SRC_URI_append_dm900 += "\
     file://add-skin_display-dm9x0.patch \
     file://dm9x0-recoverymode.patch \
     file://add-support-2160p.patch \
@@ -28,7 +28,7 @@ SRC_URI_append_dm900 += " \
     file://revert-hide-tuner-menu-items-when-no-nims-are-select.patch \
 "
 
-SRC_URI_append_dm920 += " \
+SRC_URI_append_dm920 += "\
     file://add-skin_display-dm9x0.patch \
     file://dm9x0-recoverymode.patch \
     file://add-support-2160p.patch \
@@ -39,10 +39,10 @@ SRC_URI_append_dm920 += " \
     file://revert-hide-tuner-menu-items-when-no-nims-are-select.patch \
 "
 
-SRC_URI_append_dm820 += " \
+SRC_URI_append_dm820 += "\
     file://revert-hide-tuner-menu-items-when-no-nims-are-select.patch \
 "
 
-SRC_URI_append_dm8000 += " \
+SRC_URI_append_dm8000 += "\
     file://fix-wrong-driver-date.patch \
 "

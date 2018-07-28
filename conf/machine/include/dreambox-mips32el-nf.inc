@@ -19,7 +19,7 @@ EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	dreambox-dvb-modules-${MACHINE}	\
 	v4l-dvb-module-dvb-core	\
 	v4l-dvb-module-stv0299 \
@@ -34,7 +34,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
 
 KERNEL_MODULE_AUTOLOAD += "xfs"
 
-MACHINE_EXTRA_RRECOMMENDS = " \
+MACHINE_EXTRA_RRECOMMENDS += "\
 	gstreamer1.0-plugin-dvbmediasink \
 	ntfs-3g \
 	kernel-module-cifs \
