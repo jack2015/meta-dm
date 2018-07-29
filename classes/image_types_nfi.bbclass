@@ -16,6 +16,9 @@ IMAGE_CMD_jffs2nfi = " \
 		--data-partition ${DREAMBOX_PART1_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
 		--data-partition ${DREAMBOX_PART2_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 \
 		> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi; \
+	rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
+	zip -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}_nfi.zip ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi; \
+	rm -f ${DEPLOY_DIR_IMAGE}/*.nfi; \
 "
 
 IMAGE_CMD_ubinfi = " \
@@ -57,6 +60,9 @@ IMAGE_CMD_ubinfi = " \
 		--data-partition ${DREAMBOX_PART1_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.boot.jffs2 \
 		--data-partition ${DREAMBOX_PART2_SIZE}:${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi \
 		> ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi; \
+	rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
+	zip -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}_nfi.zip ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${DMTYPE}.nfi; \
+	rm -f ${DEPLOY_DIR_IMAGE}/*.nfi; \
 "
 
 EXTRA_IMAGECMD_jffs2nfi ?= "-e ${DREAMBOX_ERASE_BLOCK_SIZE} -n -l"
