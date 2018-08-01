@@ -93,7 +93,7 @@ IMAGE_CMD_tar_prepend = "\
     rm -Rf ${IMAGEDIR}; \
     "
 
-IMAGE_CMD_tar_append = "\
+IMAGE_CMD_tar_append = ";\
     cd ${DEPLOY_DIR_IMAGE}; \
     rm -f *.rootfs.manifest; \
     rm -f .manifest; \
