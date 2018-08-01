@@ -27,7 +27,7 @@ IMAGE_CMD_tar_prepend = "\
     rm -f ${DEPLOY_DIR_IMAGE}/.tar.xz; \
     "
 
-IMAGE_CMD_tar_append = "\
+IMAGE_CMD_tar_append = ";\
     cd ${DEPLOY_DIR_IMAGE}; \
     rm -f *.rootfs.manifest; \
     rm -f .manifest; \
