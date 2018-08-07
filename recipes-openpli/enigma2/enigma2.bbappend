@@ -4,6 +4,10 @@ PYTHON_RDEPS += "\
 	python-service-identity \
 "
 
+SRC_URI_append_dm520 += "\
+    file://make-front-led-configurable.patch \
+"
+
 SRC_URI_append_dm800 += "\
     file://e2_old_dvbapi.patch \
     file://fix-wrong-driver-date.patch \
