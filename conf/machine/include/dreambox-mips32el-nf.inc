@@ -55,6 +55,7 @@ PREFERRED_VERSION_linux-dreambox = "2.6.18"
 PREFERRED_VERSION_linux-libc-headers = "2.6.18"
 PREFERRED_VERSION_wpa-supplicant = "0.5.8"
 PREFERRED_VERSION_libarchive = "3.1.2"
+PREFERRED_VERSION_wscan = "20130331"
 
 MACHINE_FEATURES += "alsa usbhost 3dtv switchoff dreambox tpm legacykernel"
 # Add "dreambox" override for recipes
