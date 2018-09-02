@@ -10,7 +10,7 @@ COMPATIBLE_MACHINE = "dm800"
 
 inherit kernel siteinfo machine_kernel_pr
 
-MACHINE_KERNEL_PR_append = ".4"
+MACHINE_KERNEL_PR_append = ".1"
 
 PRECOMPILED_ARCH = "${MACHINE}"
 LOCALVERSION = "-${PRECOMPILED_ARCH}"
