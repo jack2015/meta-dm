@@ -4,7 +4,6 @@ LICENSE = "CLOSED"
 PROVIDES += "virtual/bootloader"
 PRIORITY = "required"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-PR = "r20"
 
 SRC_URI = "http://dreamboxupdate.com/download/opendreambox/2.2.0/dreambox-secondstage/${PV}/${MACHINE}/${MD5SUM}/dreambox-secondstage_${PV}_${MACHINE}.tar.xz;name=${MACHINE}"
 

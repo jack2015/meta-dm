@@ -2,7 +2,9 @@ inherit kernel machine_kernel_pr
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-MACHINE_KERNEL_PR_append = ".16"
+COMPATIBLE_MACHINE = "dm520|dm820|dm7080"
+
+MACHINE_KERNEL_PR_append = ".1"
 
 PATCHREV = "30070c78a23d461935d9db0b6ce03afc70a10c51"
 PATCHLEVEL = "113"
@@ -58,8 +60,6 @@ if [ -z "$D" ]; then
     flash-kernel /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${LINUX_VERSION}
 fi
 }
-
-COMPATIBLE_MACHINE = "dm520|dm820|dm7080"
 
 do_rm_work() {
 }

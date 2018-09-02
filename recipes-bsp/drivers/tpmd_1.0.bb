@@ -3,7 +3,6 @@ SECTION = "base"
 PRIORITY = "required"
 LICENSE = "CLOSED"
 RDEPENDS_${PN} = "dreambox-compat wdog libssl0.9.8"
-PR = "r6"
 require conf/license/license-close.inc
 
 SRC_URI[mips32el.md5sum] = "36218ca3eff5bd0bcb13055026e50d63"

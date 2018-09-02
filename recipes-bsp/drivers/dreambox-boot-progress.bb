@@ -3,7 +3,6 @@ SECTION = "base"
 PRIORITY = "optional"
 DEPENDS = ""
 PV = "3"
-PR = "r0"
 
 require conf/license/openpli-gplv2.inc
 

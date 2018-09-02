@@ -6,7 +6,6 @@ PRIORITY = "required"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "dreambox-buildimage-native"
 DATE = "${@time.strftime('%Y%m%d',time.gmtime())}"
-PR = "r7"
 
 inherit deploy
 

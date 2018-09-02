@@ -16,9 +16,7 @@ RDEPENDS_${PN} = "\
        libdvbsi++ \
        libssl \
        libpython2 \
-       "       
-
-PR = "r9"
+       "
 
 do_install() {
         install -d ${D}${base_libdir}

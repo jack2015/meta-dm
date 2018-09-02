@@ -3,7 +3,8 @@ SECTION = "base"
 LICENSE = "CLOSED"
 DEPENDS += "virtual/kernel"
 PRIORITY = "required"
-INC_PR = "r7"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 DREAMBOX_DVB_MODULES_MIRROR ?= "http://dreamboxupdate.com/download/opendreambox/2.5.0/dreambox-dvb-modules/${KV}-${MACHINE}-${DRIVERDATE}/${MACHINE}/${MD5SUM}"
 

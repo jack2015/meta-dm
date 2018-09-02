@@ -1,4 +1,4 @@
-MACHINE_KERNEL_PR_append = ".${INC_PR}.77"
+MACHINE_KERNEL_PR_append = ".1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
