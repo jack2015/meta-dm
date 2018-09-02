@@ -1,3 +1,5 @@
+SUMMARY = "V4L dvb modules for Dreambox"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRCDATE = "20100904"
