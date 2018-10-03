@@ -1,9 +1,9 @@
 diff --git a/data/menu.xml b/data/menu.xml
-index 5afae97c9..bf19c8a42 100644
+index afd718c96..45006d9d9 100644
 --- a/data/menu.xml
 +++ b/data/menu.xml
-@@ -101,5 +101,6 @@ self.session.openWithCallback(msgClosed, FactoryReset)
- 			<item text="Restart enigma" entryID="restart_enigma"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
+@@ -102,5 +102,6 @@ self.session.openWithCallback(msgClosed, FactoryReset)
+ 			<item text="Restart enigma in debug mode" entryID="restart_enigma_debug"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
  			<item text="Deep standby" requires="DeepstandbySupport" entryID="deep_standby"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
  			<item text="Shutdown" requires="!DeepstandbySupport" entryID="deep_standby"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
 +			<item text="Recovery Mode" requires="RecoveryMode" entryID="maintenance_mode"><screen module="Standby" screen="TryQuitMainloop">16</screen></item>
@@ -34,46 +34,46 @@ index c40efa2b0..55ba60f99 100644
  		config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
  		config.lcd.standby.addNotifier(setLCDbright);
 diff --git a/lib/python/Components/SystemInfo.py b/lib/python/Components/SystemInfo.py
-index 4d3024ea9..6833e4a49 100644
+index d1dde4bcd..097e31805 100644
 --- a/lib/python/Components/SystemInfo.py
 +++ b/lib/python/Components/SystemInfo.py
-@@ -104,3 +104,4 @@ SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
+@@ -100,3 +100,4 @@ SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
  SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
  SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
  SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
 +SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode")
 diff --git a/lib/python/Screens/Standby.py b/lib/python/Screens/Standby.py
-index 2c24927fa..f5f6fcdbd 100644
+index 89f886559..c8e934ddd 100644
 --- a/lib/python/Screens/Standby.py
 +++ b/lib/python/Screens/Standby.py
-@@ -205,6 +205,7 @@ class QuitMainloopScreen(Screen):
- 			3: _("The user interface of your receiver is restarting"),
+@@ -206,6 +206,7 @@ class QuitMainloopScreen(Screen):
  			4: _("Your frontprocessor will be upgraded\nPlease wait until your receiver reboots\nThis may take a few minutes"),
  			5: _("The user interface of your receiver is restarting\ndue to an error in mytest.py"),
+ 			6: _("The user interface of your receiver is restarting in debug mode"),
 +			16: _("Your receiver is rebooting into Recovery Mode"),
  			42: _("Unattended upgrade in progress\nPlease wait until your receiver reboots\nThis may take a few minutes") }.get(retvalue)
  		self["text"] = Label(text)
  
-@@ -233,6 +234,7 @@ class TryQuitMainloop(MessageBox):
- 				2: _("Really reboot now?"),
+@@ -235,6 +236,7 @@ class TryQuitMainloop(MessageBox):
  				3: _("Really restart now?"),
  				4: _("Really upgrade the frontprocessor and reboot now?"),
+ 				6: _("Really restart in debug mode now?"),
 +				16: _("Really reboot into Recovery Mode?"),
  				42: _("Really upgrade your settop box and reboot now?") }.get(retvalue)
  			if text:
  				MessageBox.__init__(self, session, reason+text, type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
 diff --git a/tools/enigma2.sh.in b/tools/enigma2.sh.in
-index 1092d1a95..a0b37dba1 100755
+index 60251ecb5..2ab9874ec 100755
 --- a/tools/enigma2.sh.in
 +++ b/tools/enigma2.sh.in
-@@ -60,6 +60,10 @@ case $ret in
- 			echo "config.misc.RestartUI=true" >>/etc/enigma2/settings
- 		fi
- 		;;
-+	16)
+@@ -70,6 +70,10 @@ case $ret in
+     6)
+         DEBUG_LVL=4
+         ;;
++    16)
 +		echo "rescue" > /proc/stb/fp/boot_mode
 +		/sbin/reboot
 +		;;
  	42)
- 		# bind the console (when available)
- 		[ -f /sys/class/vtconsole/vtcon1/bind ] && echo 1 > /sys/class/vtconsole/vtcon1/bind
+ 		df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
+ 		while read line; do
