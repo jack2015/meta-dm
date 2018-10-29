@@ -3,6 +3,10 @@
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
+MACHINE_EXTRA_RRECOMMENDS += "\
+    gstreamer1.0-libav \
+    "
+
 MTD_KERNEL = "mtd2"
 
 require conf/machine/include/dreambox.inc
