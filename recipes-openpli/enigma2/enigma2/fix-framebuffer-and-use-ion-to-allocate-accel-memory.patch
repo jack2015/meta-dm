@@ -8,8 +8,10 @@ Also to keep the patch as small as possible to prevent patch conflicts.
  interfaces/ion.h  | 204 ++++++++++++++++++++++++++++++++++++++++++++++
  lib/gdi/fb.cpp    | 117 +++++++++++++++++++++-----
  lib/gdi/fb.h      |   1 +
- lib/gdi/gfbdc.cpp |  39 +++++++--
- 4 files changed, 332 insertions(+), 29 deletions(-)
+ lib/gdi/gfbdc.cpp |  46 +++++++++--
+ lib/gdi/grc.cpp   |  13 +++
+ lib/gdi/grc.h     |   3 +
+ 6 files changed, 355 insertions(+), 29 deletions(-)
  create mode 100644 interfaces/ion.h
 
 diff --git a/interfaces/ion.h b/interfaces/ion.h
@@ -415,10 +417,14 @@ index 0eb04915d..a4fdb8522 100644
  	void disableManualBlit();
  	int showConsole(int state);
 diff --git a/lib/gdi/gfbdc.cpp b/lib/gdi/gfbdc.cpp
-index 588e5723a..476fa6ba4 100644
+index 588e5723a..f9518b89b 100644
 --- a/lib/gdi/gfbdc.cpp
 +++ b/lib/gdi/gfbdc.cpp
-@@ -7,12 +7,17 @@
+@@ -4,15 +4,21 @@
+ #include <lib/base/init_num.h>
+ 
+ #include <lib/gdi/accel.h>
++#include <lib/gdi/grc.h>
  
  #include <time.h>
  
@@ -438,7 +444,7 @@ index 588e5723a..476fa6ba4 100644
  
  	int xres;
  	int yres;
-@@ -113,6 +118,7 @@ void gFBDC::exec(const gOpcode *o)
+@@ -113,6 +119,7 @@ void gFBDC::exec(const gOpcode *o)
  			surface = surface_back;
  			surface_back = s;
  
@@ -446,7 +452,7 @@ index 588e5723a..476fa6ba4 100644
  			if (surface.data_phys > surface_back.data_phys)
  				fb->setOffset(surface_back.y);
  			else
-@@ -144,6 +150,28 @@ void gFBDC::exec(const gOpcode *o)
+@@ -144,6 +151,28 @@ void gFBDC::exec(const gOpcode *o)
  	}
  	case gOpcode::flush:
  		fb->blit();
@@ -475,16 +481,19 @@ index 588e5723a..476fa6ba4 100644
  		break;
  	default:
  		gDC::exec(o);
-@@ -180,8 +208,6 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
+@@ -180,8 +209,9 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
  	if (m_pixmap && (surface.x == xres) && (surface.y == yres) && (surface.bpp == bpp))
  		return;
  
 -	if (gAccel::getInstance())
 -		gAccel::getInstance()->releaseAccelMemorySpace();
++	gRC *grc = gRC::getInstance();
++	if (grc)
++		grc->lock();
  
  	fb->SetMode(xres, yres, bpp);
  
-@@ -209,11 +235,8 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
+@@ -209,11 +239,8 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
  		surface_back.data_phys = 0;
  	}
  
@@ -497,6 +506,53 @@ index 588e5723a..476fa6ba4 100644
  
  	if (!surface.clut.data)
  	{
+@@ -225,6 +252,9 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
+ 	surface_back.clut = surface.clut;
+ 
+ 	m_pixmap = new gPixmap(&surface);
++
++	if (grc)
++		grc->unlock();
+ }
+ 
+ void gFBDC::saveSettings()
+diff --git a/lib/gdi/grc.cpp b/lib/gdi/grc.cpp
+index 723286264..d14efca50 100644
+--- a/lib/gdi/grc.cpp
++++ b/lib/gdi/grc.cpp
+@@ -44,6 +44,19 @@ gRC::gRC(): rp(0), wp(0)
+ 	m_spinneronoff = 1;
+ }
+ 
++void gRC::lock()
++{
++#ifndef SYNC_PAINT
++	pthread_mutex_lock(&mutex);
++#endif
++}
++void gRC::unlock()
++{
++#ifndef SYNC_PAINT
++	pthread_mutex_unlock(&mutex);
++#endif
++}
++
+ DEFINE_REF(gRC);
+ 
+ gRC::~gRC()
+diff --git a/lib/gdi/grc.h b/lib/gdi/grc.h
+index e68e80c28..556d7d855 100644
+--- a/lib/gdi/grc.h
++++ b/lib/gdi/grc.h
+@@ -187,6 +187,9 @@ public:
+ 
+ 	void submit(const gOpcode &o);
+ 
++	void lock();
++	void unlock();
++
+ 	sigc::signal0<void> notify;
+ 
+ 	void setSpinnerDC(gDC *dc) { m_spinner_dc = dc; }
 -- 
 2.19.1
-
