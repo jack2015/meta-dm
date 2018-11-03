@@ -1,8 +1,16 @@
 Based on:
 https://github.com/openatv/enigma2/commit/0f049825127cc7df976f3c4a7787894f64f6a6ef
 
-Without macro and preprocessor directives since we apply this patch for given machines only, is that a bit ambiguous.
+Without macro and preprocessor directives since we apply this patch for given machines only.
 Also to keep the patch as small as possible to prevent patch conflicts.
+
+---
+ interfaces/ion.h  | 204 ++++++++++++++++++++++++++++++++++++++++++++++
+ lib/gdi/fb.cpp    | 117 +++++++++++++++++++++-----
+ lib/gdi/fb.h      |   1 +
+ lib/gdi/gfbdc.cpp |  26 ++++--
+ 4 files changed, 319 insertions(+), 29 deletions(-)
+ create mode 100644 interfaces/ion.h
 
 diff --git a/interfaces/ion.h b/interfaces/ion.h
 new file mode 100644
@@ -215,7 +223,7 @@ index 000000000..3af51b418
 +
 +#endif /* _UAPI_LINUX_ION_H */
 diff --git a/lib/gdi/fb.cpp b/lib/gdi/fb.cpp
-index 66c1e5e56..72a1bc54f 100644
+index 66c1e5e56..be8bca64e 100644
 --- a/lib/gdi/fb.cpp
 +++ b/lib/gdi/fb.cpp
 @@ -13,10 +13,11 @@
@@ -243,24 +251,21 @@ index 66c1e5e56..72a1bc54f 100644
  	fbFd=open(fb, O_RDWR);
  	if (fbFd<0)
  	{
-@@ -64,10 +67,81 @@ fbClass::fbClass(const char *fb)
+@@ -64,6 +67,83 @@ fbClass::fbClass(const char *fb)
  	m_phys_mem = fix.smem_start;
  	eDebug("[fb] %s: %dk video mem", fb, available/1024);
  	lfb=(unsigned char*)mmap(0, available, PROT_WRITE|PROT_READ, MAP_SHARED, fbFd, 0);
--	if (!lfb)
 +
 +	/* allocate accel memory here... its independent from the framebuffer */
 +	ion = open("/dev/ion", O_RDWR | O_CLOEXEC);
 +	if (ion >= 0)
- 	{
--		eDebug("[fb] mmap: %m");
--		goto nolfb;
++	{
 +		struct ion_allocation_data alloc_data;
 +		struct ion_fd_data share_data;
 +		struct ion_handle_data free_data;
 +		struct ion_phys_data phys_data;
 +		int ret;
-+		unsigned char *lfb;
++		// unsigned char *lfb;
 +
 +		eDebug("Using ION allocator");
 +
@@ -304,7 +309,7 @@ index 66c1e5e56..72a1bc54f 100644
 +
 +		if (lfb)
 +		{
-+			eDebug("%dkB available for acceleration surfaces (via ION).", ACCEL_MEM_SIZE);
++			eDebug("%dkB available for acceleration surfaces (via ION).", ACCEL_MEM_SIZE / 1024);
 +			gAccel::getInstance()->setAccelMemorySpace(lfb, phys_data.addr, ACCEL_MEM_SIZE);
 +		}
 +		else
@@ -325,10 +330,12 @@ index 66c1e5e56..72a1bc54f 100644
 +	{
 +		eFatal("failed to open ION device node! no allocate accel memory available !!");
 +		m_accel_fd = -1;
- 	}
- 
- 	showConsole(0);
-@@ -100,6 +174,11 @@ int fbClass::showConsole(int state)
++	}
++
+ 	if (!lfb)
+ 	{
+ 		eDebug("[fb] mmap: %m");
+@@ -100,6 +180,11 @@ int fbClass::showConsole(int state)
  
  int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
  {
@@ -340,7 +347,15 @@ index 66c1e5e56..72a1bc54f 100644
  	if (fbFd < 0) return -1;
  	screeninfo.xres_virtual=screeninfo.xres=nxRes;
  	screeninfo.yres_virtual=(screeninfo.yres=nyRes)*2;
-@@ -167,6 +246,12 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
+@@ -148,6 +233,7 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
+ 		eDebug("[fb] double buffering available!");
+ 
+ 	m_number_of_pages = screeninfo.yres_virtual / nyRes;
++	eDebug("[fb] %d page(s) available!", m_number_of_pages);
+ 
+ 	ioctl(fbFd, FBIOGET_VSCREENINFO, &screeninfo);
+ 
+@@ -167,6 +253,12 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
  		eDebug("[fb] FBIOGET_FSCREENINFO: %m");
  	}
  	stride=fix.line_length;
@@ -353,7 +368,7 @@ index 66c1e5e56..72a1bc54f 100644
  	memset(lfb, 0, stride*yRes);
  	blit();
  	return 0;
-@@ -196,11 +281,6 @@ int fbClass::waitVSync()
+@@ -196,11 +288,6 @@ int fbClass::waitVSync()
  
  void fbClass::blit()
  {
@@ -365,7 +380,7 @@ index 66c1e5e56..72a1bc54f 100644
  }
  
  fbClass::~fbClass()
-@@ -252,21 +332,9 @@ void fbClass::unlock()
+@@ -252,21 +339,9 @@ void fbClass::unlock()
  
  void fbClass::enableManualBlit()
  {
@@ -400,7 +415,7 @@ index 0eb04915d..a4fdb8522 100644
  	void disableManualBlit();
  	int showConsole(int state);
 diff --git a/lib/gdi/gfbdc.cpp b/lib/gdi/gfbdc.cpp
-index 588e5723a..e7a9d5af6 100644
+index 588e5723a..77d0d9c66 100644
 --- a/lib/gdi/gfbdc.cpp
 +++ b/lib/gdi/gfbdc.cpp
 @@ -11,8 +11,6 @@ gFBDC::gFBDC()
@@ -412,7 +427,31 @@ index 588e5723a..e7a9d5af6 100644
  
  	int xres;
  	int yres;
-@@ -180,8 +178,6 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
+@@ -144,6 +142,23 @@ void gFBDC::exec(const gOpcode *o)
+ 	}
+ 	case gOpcode::flush:
+ 		fb->blit();
++
++		if (surface_back.data_phys)
++		{
++			gUnmanagedSurface s(surface);
++			surface = surface_back;
++			surface_back = s;
++			if (surface.data_phys > surface_back.data_phys)
++			{
++				fb->setOffset(0);
++			}
++			else
++			{
++				fb->setOffset(surface_back.y);
++			}
++			memcpy(surface.data, surface_back.data, surface.stride * surface.y);
++		}
++
+ 		break;
+ 	default:
+ 		gDC::exec(o);
+@@ -180,8 +195,6 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
  	if (m_pixmap && (surface.x == xres) && (surface.y == yres) && (surface.bpp == bpp))
  		return;
  
@@ -421,13 +460,13 @@ index 588e5723a..e7a9d5af6 100644
  
  	fb->SetMode(xres, yres, bpp);
  
-@@ -209,11 +205,8 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
+@@ -209,11 +222,8 @@ void gFBDC::setResolution(int xres, int yres, int bpp)
  		surface_back.data_phys = 0;
  	}
  
 -	eDebug("[gFBDC] resolution: %dx%dx%d stride=%d, %dkB available for acceleration surfaces.",
 -		 surface.x, surface.y, surface.bpp, fb->Stride(), (fb->Available() - fb_size)/1024);
-+	eDebug("[gFBDC] resolution: %d x %d x %d (stride: %d)", surface.x, surface.y, surface.bpp, fb->Stride());
++	eDebug("[gFBDC] resolution: %d x %d x %d (stride: %d) pages: %d", surface.x, surface.y, surface.bpp, fb->Stride(), fb->getNumPages());
  
 -	if (gAccel::getInstance())
 -		gAccel::getInstance()->setAccelMemorySpace(fb->lfb + fb_size, surface.data_phys + fb_size, fb->Available() - fb_size);
@@ -435,5 +474,5 @@ index 588e5723a..e7a9d5af6 100644
  	if (!surface.clut.data)
  	{
 -- 
-2.17.0
+2.19.1
 
