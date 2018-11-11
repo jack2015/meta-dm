@@ -6,6 +6,11 @@ PRIORITY = "required"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+BCMNUMBER = "bcm7435"
+BCMNUMBER_dm520 = "bcm73625"
+BCMNUMBER_dm900 = "bcm7439"
+BCMNUMBER_dm920 = "bcm7439"
+
 DREAMBOX_DVB_MODULES_MIRROR ?= "http://dreamboxupdate.com/download/opendreambox/2.5.0/dreambox-dvb-modules/${KV}-${MACHINE}-${DRIVERDATE}/${MACHINE}/${MD5SUM}"
 
 SRC_URI = "${DREAMBOX_DVB_MODULES_MIRROR}/dreambox-dvb-modules_${KV}-${MACHINE}-${DRIVERDATE}_${MACHINE}.tar.xz;name=${MACHINE}"
@@ -36,62 +41,13 @@ do_install_append() {
         echo "lcd" > ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
         chmod 0644 ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
     fi
-    for module in bcm7435 dreambox_keyboard; do
+    for module in ${BCMNUMBER} dreambox_keyboard ble; do
         if [ -f ${D}/lib/modules/${DM_LOCALVERSION}/extra/$module.ko ]; then
             echo $module >> ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
         fi
     done
     chmod 0644 ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
 }
-
-do_install_append_dm520() {
-    install -d ${D}${sysconfdir}/modules-load.d
-    echo "stb-core" > ${D}${sysconfdir}/modules-load.d/01-${BPN}-stb-core.conf
-    chmod 0644 ${D}${sysconfdir}/modules-load.d/01-${BPN}-stb-core.conf
-    if [ -f ${D}/lib/modules/${DM_LOCALVERSION}/extra/lcd.ko ]; then
-        echo "lcd" > ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
-        chmod 0644 ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
-    fi
-    for module in bcm73625 dreambox_keyboard; do
-        if [ -f ${D}/lib/modules/${DM_LOCALVERSION}/extra/$module.ko ]; then
-            echo $module >> ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
-        fi
-    done
-    chmod 0644 ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
-}
-
-do_install_append_dm900() {
-    install -d ${D}${sysconfdir}/modules-load.d
-    echo "stb-core" > ${D}${sysconfdir}/modules-load.d/01-${BPN}-stb-core.conf
-    chmod 0644 ${D}${sysconfdir}/modules-load.d/01-${BPN}-stb-core.conf
-    if [ -f ${D}/lib/modules/${DM_LOCALVERSION}/extra/lcd.ko ]; then
-        echo "lcd" > ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
-        chmod 0644 ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
-    fi
-    for module in bcm7439 dreambox_keyboard; do
-        if [ -f ${D}/lib/modules/${DM_LOCALVERSION}/extra/$module.ko ]; then
-            echo $module >> ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
-        fi
-    done
-    chmod 0644 ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
-}
-
-do_install_append_dm920() {
-    install -d ${D}${sysconfdir}/modules-load.d
-    echo "stb-core" > ${D}${sysconfdir}/modules-load.d/01-${BPN}-stb-core.conf
-    chmod 0644 ${D}${sysconfdir}/modules-load.d/01-${BPN}-stb-core.conf
-    if [ -f ${D}/lib/modules/${DM_LOCALVERSION}/extra/lcd.ko ]; then
-        echo "lcd" > ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
-        chmod 0644 ${D}${sysconfdir}/modules-load.d/02-${BPN}-lcd.conf
-    fi
-    for module in bcm7439 dreambox_keyboard; do
-        if [ -f ${D}/lib/modules/${DM_LOCALVERSION}/extra/$module.ko ]; then
-            echo $module >> ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
-        fi
-    done
-    chmod 0644 ${D}${sysconfdir}/modules-load.d/10-${BPN}.conf
-}
-
 
 PACKAGES =+ "${PN}-lcd ${PN}-stb-core"
 
