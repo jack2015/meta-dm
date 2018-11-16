@@ -21,5 +21,6 @@ OPTIONAL_PACKAGES_remove += "\
 			dm7020hdv2 \
 			', ' \
 			rtl8189es \
+			rtl8812au \
 			', '', d)} \
 			"
