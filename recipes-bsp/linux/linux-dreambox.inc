@@ -7,33 +7,6 @@ inherit kernel siteinfo machine_kernel_pr
 
 PACKAGES_DYNAMIC = "kernel-*"
 
-# For packages that RDEPEND on particular kernel modules, list the ones built into
-# the kernel here, so that it is known that the kernel has them built in.
-KERNEL_BUILTIN_MODULES = "kernel-module-block2mtd"
-
-KERNEL_BUILTIN_MODULES_dm8000 = "\
-	kernel-module-stv0299 \
-	"
-KERNEL_BUILTIN_MODULES_dm800se = "\
-	kernel-module-block2mtd \
-	kernel-module-stv0299 \
-	"
-KERNEL_BUILTIN_MODULES_dm800sev2 = "\
-	kernel-module-block2mtd \
-	kernel-module-stv0299 \
-	"
-KERNEL_BUILTIN_MODULES_dm7020hd = "\
-	kernel-module-block2mtd \
-	kernel-module-fuse \
-	kernel-module-stv0299 \
-	"
-KERNEL_BUILTIN_MODULES_dm500hd = "\
-	kernel-module-block2mtd \
-	"
-KERNEL_BUILTIN_MODULES_dm500hdv2 = "\
-	kernel-module-block2mtd \
-	"
-
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
