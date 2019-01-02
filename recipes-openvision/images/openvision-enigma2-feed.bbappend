@@ -3,14 +3,6 @@ OPTIONAL_PACKAGES_remove_dm800 += "\
 	iptraf \
 	"
 
-OPTIONAL_PACKAGES_remove_dm900 += "\
-	rtl8192cu \
-	"
-
-OPTIONAL_PACKAGES_remove_dm920 += "\
-	rtl8192cu \
-	"
-
 OPTIONAL_PACKAGES_remove += "\
 			${@bb.utils.contains_any('MACHINE', '\
 			dm500hd \
