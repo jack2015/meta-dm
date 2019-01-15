@@ -34,19 +34,19 @@ index c40efa2b0..55ba60f99 100644
  		config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
  		config.lcd.standby.addNotifier(setLCDbright);
 diff --git a/lib/python/Components/SystemInfo.py b/lib/python/Components/SystemInfo.py
-index d1dde4bcd..097e31805 100644
+index 042ad54ef..d6523abc2 100644
 --- a/lib/python/Components/SystemInfo.py
 +++ b/lib/python/Components/SystemInfo.py
-@@ -100,3 +100,4 @@ SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
+@@ -98,3 +98,4 @@ SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
  SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
  SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
  SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
 +SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode")
 diff --git a/lib/python/Screens/Standby.py b/lib/python/Screens/Standby.py
-index 89f886559..c8e934ddd 100644
+index 1740fd3bf..aac921620 100644
 --- a/lib/python/Screens/Standby.py
 +++ b/lib/python/Screens/Standby.py
-@@ -206,6 +206,7 @@ class QuitMainloopScreen(Screen):
+@@ -207,6 +207,7 @@ class QuitMainloopScreen(Screen):
  			4: _("Your frontprocessor will be upgraded\nPlease wait until your receiver reboots\nThis may take a few minutes"),
  			5: _("The user interface of your receiver is restarting\ndue to an error in mytest.py"),
  			6: _("The user interface of your receiver is restarting in debug mode"),
@@ -54,7 +54,7 @@ index 89f886559..c8e934ddd 100644
  			42: _("Unattended upgrade in progress\nPlease wait until your receiver reboots\nThis may take a few minutes") }.get(retvalue)
  		self["text"] = Label(text)
  
-@@ -235,6 +236,7 @@ class TryQuitMainloop(MessageBox):
+@@ -244,6 +245,7 @@ class TryQuitMainloop(MessageBox):
  				3: _("Really restart now?"),
  				4: _("Really upgrade the frontprocessor and reboot now?"),
  				6: _("Really restart in debug mode now?"),
@@ -63,17 +63,17 @@ index 89f886559..c8e934ddd 100644
  			if text:
  				MessageBox.__init__(self, session, reason+text, type = MessageBox.TYPE_YESNO, timeout = timeout, default = default_yes)
 diff --git a/tools/enigma2.sh.in b/tools/enigma2.sh.in
-index 60251ecb5..2ab9874ec 100755
+index 6811a3672..1cdddb4be 100755
 --- a/tools/enigma2.sh.in
 +++ b/tools/enigma2.sh.in
-@@ -70,6 +70,10 @@ case $ret in
-     6)
-         DEBUG_LVL=4
-         ;;
-+    16)
-+		echo "rescue" > /proc/stb/fp/boot_mode
-+		/sbin/reboot
-+		;;
- 	42)
- 		df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
- 		while read line; do
+@@ -85,6 +85,10 @@ while : ; do
+ 		6)
+ 			DEBUG_LVL=4
+ 			;;
++		16)
++			echo "rescue" > /proc/stb/fp/boot_mode
++			/sbin/reboot
++			;;
+ 		42)
+ 			df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
+ 			while read line; do
