@@ -1,15 +1,15 @@
 diff --git a/data/setup.xml b/data/setup.xml
-index f672e373f..976683496 100644
+index 9fc780d9c..e011f901c 100644
 --- a/data/setup.xml
 +++ b/data/setup.xml
-@@ -209,6 +209,7 @@
+@@ -212,6 +212,7 @@
  		<item level="0" text="Brightness" description="Configure the brightness level of the front panel display.">config.lcd.bright</item>
  		<item level="0" text="Contrast" description="Configure the contrast level of the front panel display.">config.lcd.contrast</item>
  		<item level="0" text="Standby" description="Configure the brightness level of the front panel display during standby.">config.lcd.standby</item>
 +		<item level="0" text="Front LED on" description="Turn on front LED (this needs a restart of enigma2).">config.usage.frontled_on</item>
- 		<item level="0" text="StandbyLED" description="Turn on the power LED during standby." requires="StandbyLED">config.usage.standbyLED</item>
+ 		<item level="0" text="Standby LED" description="Turn on the power LED during standby." requires="StandbyLED">config.usage.standbyLED</item>
+ 		<item level="0" text="Deep Standby LED" description="Turn on the power LED during deep standby." requires="StandbyLED">config.usage.suspendLED</item>
  		<item level="0" text="Scroll repeats" description="Number of repeating text on display." requires="VFD_scroll_repeats">config.usage.vfd_scroll_repeats</item>
- 		<item level="2" text="Scroll delay" description="Delay in miliseconds between scrolling characters on display." requires="VFD_scroll_delay">config.usage.vfd_scroll_delay</item>
 diff --git a/lib/python/Components/UsageConfig.py b/lib/python/Components/UsageConfig.py
 index 741e7c5d6..72dd6d9b6 100644
 --- a/lib/python/Components/UsageConfig.py
