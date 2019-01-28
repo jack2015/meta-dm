@@ -9,6 +9,8 @@ DATE = "${@time.strftime('%Y%m%d',time.gmtime())}"
 
 inherit deploy
 
+do_configure[nostamp] = "1"
+
 SRC_URI = "http://sources.dreamboxupdate.com/download/7020/secondstage-${MACHINE}-${PV}.bin"
 
 PACKAGES = "${PN}"
