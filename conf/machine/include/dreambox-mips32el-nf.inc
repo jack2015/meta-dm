@@ -8,9 +8,6 @@ MTD_KERNEL = "mtd2"
 KERNEL_FILE = "kernel.bin"
 ROOTFS_FILE = "rootfs.bin"
 
-BRAND_OEM = "dreambox"
-MACHINE_BRAND = "Dreambox"
-
 MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"
 OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
