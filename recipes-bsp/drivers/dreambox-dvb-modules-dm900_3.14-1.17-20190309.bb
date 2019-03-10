@@ -3,8 +3,8 @@ DRIVERDATE = "20181127"
 
 require dreambox-dvb-modules-new.inc
 
-SRC_URI[dm900.md5sum] = "ef6986307b6c499ae0b1a9a69129fb87"
-SRC_URI[dm900.sha256sum] = "50ae594b9835e4ba27800a6c64fdd710ac71725fee55164583352cb1d33c4ca7"
+SRC_URI[dm900.md5sum] = "85b346c0d41e5f128ba734202cd05e5a"
+SRC_URI[dm900.sha256sum] = "fa0aa8005cf8ec1ed4fa34e15ccef1b81eb09c10188281a4a837296d8c9a6870"
 
 COMPATIBLE_MACHINE = "dm900"
 
