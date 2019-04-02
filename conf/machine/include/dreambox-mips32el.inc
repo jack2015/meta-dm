@@ -7,6 +7,11 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     gstreamer1.0-libav \
     "
 
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+    libpagecache \
+    libpassthrough \
+"
+
 MTD_KERNEL = "mtd2"
 
 require conf/machine/include/dreambox.inc
