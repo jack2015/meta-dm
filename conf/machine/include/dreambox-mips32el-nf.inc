@@ -1,5 +1,7 @@
 # dreambox-mips32el-nf.inc
 
+BOX_BRAND = "dreambox"
+
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el-nf"
 

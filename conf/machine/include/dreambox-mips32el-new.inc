@@ -1,5 +1,7 @@
 # dreambox-mips32el-new.inc
 
+BOX_BRAND = "dreambox"
+
 PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
 PREFERRED_VERSION_linux-dreambox = "3.4"

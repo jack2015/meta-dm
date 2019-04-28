@@ -1,5 +1,7 @@
 # dreambox-arm.inc
 
+BOX_BRAND = "dreambox"
+
 MTD_ROOTFS = "mmcblk0p2"
 MTD_KERNEL = "mmcblk0p1"
 KERNEL_FILE = "kernel.bin"
