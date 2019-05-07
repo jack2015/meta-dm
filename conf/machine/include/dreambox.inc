@@ -21,7 +21,7 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 	"
 
 MACHINE_EXTRA_RRECOMMENDS_append_dm8000 += "\
-	kernel-module-ath5k \
+	enigma2-plugin-drivers-network-ath5k \
 	"
 
 MACHINE_FEATURES += "alsa usbhost 3dtv switchoff dreambox"
