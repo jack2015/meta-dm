@@ -20,6 +20,10 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 	dreambox-boot-progress \
 	"
 
+MACHINE_EXTRA_RRECOMMENDS_append_dm8000 += "\
+	kernel-module-ath5k \
+	"
+
 MACHINE_FEATURES += "alsa usbhost 3dtv switchoff dreambox"
 # Add "dreambox" override for recipes
 MACHINEOVERRIDES .= ":dreambox"
