@@ -5,10 +5,6 @@ BOX_BRAND = "dreambox"
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-    gstreamer1.0-libav \
-    "
-
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     libpagecache \
     libpassthrough \
