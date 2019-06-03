@@ -5,6 +5,10 @@ BOX_BRAND = "dreambox"
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
+MACHINE_EXTRA_RRECOMMENDS += "\
+    ${@bb.utils.contains_any("MACHINE", "dm500hd dm800 dm800se", "", "gstreamer1.0-libav", d)} \
+    "
+
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     libpagecache \
     libpassthrough \
