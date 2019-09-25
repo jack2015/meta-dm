@@ -13,7 +13,7 @@ S = "${WORKDIR}/dreambox-secondstage_${PV}_${MACHINE}"
 
 do_install() {
     install -d ${D}${datadir}/dreambox-secondstage
-    install -m 0644 ${S}${datadir}/dreambox-secondstage/ssbl.bin ${D}${datadir}dreambox-secondstage/ssbl.bin
+    install -m 0644 ${S}${datadir}/dreambox-secondstage/ssbl.bin ${D}${datadir}/dreambox-secondstage/ssbl.bin
 }
 
 RDEPENDS_${PN} = "flash-scripts"
