@@ -13,8 +13,8 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}/etc/init.d/
-    install -m 0755 ${WORKDIR}/startup_fix.sh ${D}/etc/init.d/startup_fix
+    install -d ${D}${sysconfdir}/init.d/
+    install -m 0755 ${WORKDIR}/startup_fix.sh ${D}${sysconfdir}/init.d/startup_fix
 }
 
 pkg_postinst_${PN}() {
