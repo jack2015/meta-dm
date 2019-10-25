@@ -5,4 +5,4 @@ SRC_URI[modules.sha256sum] = "017198bf264be62206979cb80549d1c74fe539b6a4467b2b35
 
 RDEPENDS_${PN} += "kernel-module-stv0299"
 
-COMPATIBLE_MACHINE = "dm7020hd"
+COMPATIBLE_MACHINE = "^(dm7020hd)$"

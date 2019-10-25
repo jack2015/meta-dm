@@ -5,4 +5,4 @@ SRC_URI[modules.sha256sum] = "f34897dd856e50bbd8fb7df203d649230da2b3040713f7a6c8
 
 RDEPENDS_${PN} += "kernel-module-stv0299"
 
-COMPATIBLE_MACHINE = "dm800se"
+COMPATIBLE_MACHINE = "^(dm800se)$"

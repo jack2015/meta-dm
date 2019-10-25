@@ -6,7 +6,7 @@ require conf/license/openvision-gplv2.inc
 inherit module
 DEPENDS += "virtual/kernel"
 
-COMPATIBLE_MACHINE = "dm800"
+COMPATIBLE_MACHINE = "^(dm800)$"
 
 INHIBIT_PACKAGE_STRIP = "1"
 

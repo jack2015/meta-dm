@@ -6,7 +6,7 @@ PATCHREV = "ac6cc9511a5f70eaa584c63fc5c3de33cae1d0e7"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "dm800"
+COMPATIBLE_MACHINE = "^(dm800)$"
 
 inherit kernel siteinfo machine_kernel_pr
 

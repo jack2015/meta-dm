@@ -19,8 +19,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 RDEPENDS_${PN} = "dreambox-dvb-modules-${MACHINE}-lcd"
 
 BRANCH = "master"
-BRANCH_dm820 = "${BRANCH_dm7080}"
 BRANCH_dm7080 = "dm7080"
+BRANCH_dm820 = "${BRANCH_dm7080}"
 
 COMPATIBLE_MACHINE = "^(dm820|dm7080)$"
 
