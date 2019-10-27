@@ -29,6 +29,3 @@ pkg_postinst_${PN}() {
 	echo "config.inputDevices.event1.enabled=true" >> $D/etc/enigma2/settings
 	echo "config.inputDevices.event1.name=dreambox remote control (native)" >> $D/etc/enigma2/settings
 }
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-

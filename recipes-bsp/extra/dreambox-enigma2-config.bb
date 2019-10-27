@@ -10,8 +10,11 @@ PV = "1.0"
 SRC_URI = "file://skin_box.xml file://LICENSE"
 
 PACKAGES = "${PN}"
+
 FILES_${PN} = "${datadir}/enigma2"
-PACKAGE_ARCH = "all"
+
+PACKAGE_ARCH = "${MACHINE}"
+
 S = "${WORKDIR}"
 
 do_install() {

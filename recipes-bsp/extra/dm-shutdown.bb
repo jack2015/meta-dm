@@ -17,5 +17,3 @@ do_install() {
     install -m 0755 ${WORKDIR}/dm-shutdown.sh ${D}${sysconfdir}/init.d/dm-shutdown
 }
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
