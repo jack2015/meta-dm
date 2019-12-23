@@ -25,8 +25,6 @@ MACHINE_EXTRA_RRECOMMENDS_append_dm8000 += "\
 	"
 
 MACHINE_FEATURES += "alsa usbhost 3dtv switchoff dreambox"
-# Add "dreambox" override for recipes
-MACHINEOVERRIDES .= ":dreambox"
 
 PREFERRED_PROVIDER_virtual/bootloader = "dreambox-secondstage-${MACHINE}"
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"

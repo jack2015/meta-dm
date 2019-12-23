@@ -53,8 +53,6 @@ PREFERRED_VERSION_wpa-supplicant = "0.5.8"
 PREFERRED_VERSION_wscan = "20130331"
 
 MACHINE_FEATURES += "alsa usbhost 3dtv switchoff dreambox legacykernel"
-# Add "dreambox" override for recipes
-MACHINEOVERRIDES .= ":dreambox"
 
 PREFERRED_PROVIDER_virtual/bootloader = "dreambox-secondstage-${MACHINE}"
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"

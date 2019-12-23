@@ -52,8 +52,6 @@ KERNEL_MODULE_AUTOLOAD += "xfs"
 DISTRO_FEATURES_remove = "directfb gtk-directfb"
     
 MACHINE_FEATURES += "dreambox alsa usbhost 3dtv switchoff blindscan-dvbs"
-# Add "dreambox" override for recipes
-MACHINEOVERRIDES .= ":dreambox"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
 PREFERRED_PROVIDER_virtual/blindscan-dvbs = "dreambox-blindscan-utils"
