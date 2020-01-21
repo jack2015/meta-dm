@@ -22,12 +22,7 @@ SRC_URI[dm800.sha256sum] = "978a7c50fd0c963013477b5ba08462b35597ea130ae428c828bf
 do_install() {
     install -d ${D}/boot
     install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
-    if [ "${MACHINE}" == "dm800" ]
-    then
-        install -m 0755 ${S}/dm800-logo.jpg ${D}/boot/bootlogo-${MACHINE}.jpg
-    else
-        install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.jpg ${D}/boot/
-    fi
+    install -m 0755 ${S}/dm800-logo.jpg ${D}/boot/bootlogo-${MACHINE}.jpg
 }
 
 inherit deploy
