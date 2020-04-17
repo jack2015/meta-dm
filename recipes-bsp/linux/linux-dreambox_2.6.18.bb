@@ -67,12 +67,13 @@ SRC_URI = " \
         file://mips-pps.patch \
 	file://vermagic.patch \
 	file://binutils-gcc6.patch \
-	file://kernel-gcc7.patch \
+	file://compiler-version.patch \
 	file://add_resolution_to_absinfo.patch \
 	file://add_strcasecmp.patch \
 	file://extra_ipv6_headers.patch \
 	file://dm-ioctl-add-data-to-struct.patch \
 	file://defconfig \
+	file://${OPENVISION_BASE}/openvision-oe/recipes-linux/kernel-patches/kernel-add-support-for-gcc6.patch \
 "
 
 SRC_URI[kernel.md5sum] = "296a6d150d260144639c3664d127d174"

@@ -1,0 +1,19 @@
+diff -Naur linux-2.6.18.orig/include/linux/compiler.h linux-2.6.18/include/linux/compiler.h
+--- linux-2.6.18.orig/include/linux/compiler.h	2006-09-20 05:42:06.000000000 +0200
++++ linux-2.6.18/include/linux/compiler.h	2017-08-24 09:53:42.447358784 +0200
+@@ -36,8 +36,14 @@
+ 
+ #ifdef __KERNEL__
+ 
+-#if __GNUC__ > 4
++#if __GNUC__ > 7
+ #error no compiler-gcc.h file for this gcc version
++#elif __GNUC__ == 7
++# include <linux/compiler-gcc7.h>
++#elif __GNUC__ == 6
++# include <linux/compiler-gcc6.h>
++#elif __GNUC__ == 5
++# include <linux/compiler-gcc5.h>
+ #elif __GNUC__ == 4
+ # include <linux/compiler-gcc4.h>
+ #elif __GNUC__ == 3
