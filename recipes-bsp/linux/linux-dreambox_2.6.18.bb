@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "^(dm800)$"
 
-inherit kernel siteinfo machine_kernel_pr
+inherit kernel machine_kernel_pr samba_change_dialect siteinfo
 
 PRECOMPILED_ARCH = "${MACHINE}"
 LOCALVERSION = "-${PRECOMPILED_ARCH}"
