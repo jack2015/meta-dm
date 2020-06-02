@@ -23,9 +23,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	firmware-rt73 \
 	firmware-rtl8712u \
 	firmware-zd1211 \
-	\
-	rtl871x \
-	rt73 \
+	kernel-module-extrawlan-rtl871x \
+	kernel-module-extrawlan-rt73 \
 	kernel-module-zd1211rw \
 "
 
@@ -33,7 +32,6 @@ KERNEL_MODULE_AUTOLOAD += "xfs"
 
 MACHINE_EXTRA_RRECOMMENDS += "\
 	gstreamer1.0-plugin-dvbmediasink \
-	ntfs-3g \
 	kernel-module-cifs \
 	kernel-module-hmac \
 	kernel-module-md4 \
