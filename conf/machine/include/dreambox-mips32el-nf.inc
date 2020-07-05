@@ -50,7 +50,7 @@ PREFERRED_VERSION_linux-libc-headers = "2.6.18"
 PREFERRED_VERSION_wpa-supplicant = "0.5.8"
 PREFERRED_VERSION_wscan = "20130331"
 
-MACHINE_FEATURES += "alsa usbhost 3dtv switchoff dreambox legacykernel"
+MACHINE_FEATURES += "alsa usbhost switchoff dreambox"
 
 PREFERRED_PROVIDER_virtual/bootloader = "dreambox-secondstage-${MACHINE}"
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
