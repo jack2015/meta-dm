@@ -29,7 +29,7 @@ ALLOW_EMPTY_${PN} = "1"
 
 FILES_${PN}-tests += " \
     /lib/firmware/* \
-    /lib/modules/*/modules.* \
+    ${base_libdir}/modules/*/modules.* \
     "
 
 pkg_postinst_modules() {
@@ -136,8 +136,8 @@ python split_kernel_module_packages () {
     def get_dependencies(file, pattern, format):
         # file no longer includes PKGD
         file = file.replace(d.getVar('PKGD', True) or '', '', 1)
-        # instead is prefixed with /lib/modules/${KERNEL_VERSION}
-        file = file.replace("/lib/modules/%s/" % d.getVar('KERNEL_VERSION', True) or '', '', 1)
+        # instead is prefixed with ${base_libdir}/modules/${KERNEL_VERSION}
+        file = file.replace("${base_libdir}/modules/%s/" % d.getVar('KERNEL_VERSION', True) or '', '', 1)
 
         if file in module_deps:
             dependencies = []
@@ -200,7 +200,7 @@ python split_kernel_module_packages () {
     postinst = d.getVar('pkg_postinst_modules', True)
     postrm = d.getVar('pkg_postrm_modules', True)
 
-    modules = do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='kernel-%s' % (d.getVar("KERNEL_VERSION", True)))
+    modules = do_split_packages(d, root='${base_libdir}/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='kernel-%s' % (d.getVar("KERNEL_VERSION", True)))
     if modules:
         metapkg = d.getVar('KERNEL_MODULES_META_PACKAGE', True)
         d.appendVar('RDEPENDS_' + metapkg, ' '+' '.join(modules))
