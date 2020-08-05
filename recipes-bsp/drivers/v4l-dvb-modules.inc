@@ -27,7 +27,7 @@ PACKAGES = "v4l-dvb-modules ${PN}-tests"
 FILES_${PN} = ""
 ALLOW_EMPTY_${PN} = "1"
 
-FILES_${PN}-tests += " \
+FILES_${PN}-tests += "\
     /lib/firmware/* \
     ${base_libdir}/modules/*/modules.* \
     "
