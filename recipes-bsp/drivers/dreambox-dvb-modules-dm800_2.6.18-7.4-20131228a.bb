@@ -4,14 +4,16 @@ LICENSE = "CLOSED"
 DEPENDS += "virtual/kernel"
 PRIORITY = "required"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 SRC_URI[modules.md5sum] = "ed50381eb09c8278ebc3decba2d0c8e9"
 SRC_URI[modules.sha256sum] = "d85e9968ea19a1394ccde7bcf0f57c976e169ba9581eda52d9a979c49541b295"
 
 COMPATIBLE_MACHINE = "^(dm800)$"
 
 SRC_URI = "http://source.mynonpublic.com/dreambox/dreambox-dvb-modules-${MACHINE}-${DM_LOCALVERSION}-${DRIVERDATE}.zip;name=modules \
-       file://modules \
-"
+	file://modules \
+	"
 
 inherit module-base
 

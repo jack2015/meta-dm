@@ -2,13 +2,14 @@ SUMMARY = "Linux kernel for ${MACHINE}"
 SECTION = "kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-PATCHREV = "ac6cc9511a5f70eaa584c63fc5c3de33cae1d0e7"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "^(dm800)$"
 
 inherit kernel machine_kernel_pr samba_change_dialect siteinfo
+
+PATCHREV = "ac6cc9511a5f70eaa584c63fc5c3de33cae1d0e7"
 
 PRECOMPILED_ARCH = "${MACHINE}"
 LOCALVERSION = "-${PRECOMPILED_ARCH}"
@@ -37,34 +38,34 @@ CMDLINE = "${@bb.utils.contains('IMAGE_FSTYPES', 'ubinfi', '${CMDLINE_UBI}', '${
 USB_CMDLINE = "root=${USB_ROOT} rootdelay=10 rw ${CMDLINE_CONSOLE}"
 
 SRC_URI = " \
-        ${KERNELORG_MIRROR}/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
-        http://sources.dreamboxupdate.com/download/kernel-patches/${P}-${PATCHREV}.patch.bz2;name=patch \
-        http://download.filesystems.org/unionfs/unionfs-2.x/unionfs-2.5.11_for_2.6.18.8.diff.gz;name=unionfs \
-        file://stblinux-2.6.18-extra-version-7.4.patch \
-        file://stblinux-2.6.18-brcmnand-oob-raw-write-fix.patch \
-        file://linux-2.6.18-fix-mips-crosscompile.patch \
-        file://linux-2.6.18-fix-proc-cputype.patch \
-        file://dvb-api-2.6.18-5.3.patch \
-        file://linux-2.6.18-dvb-core-headers-20100904.patch \
-        file://linux-2.6.18-dvb-frontends-headers-20100904.patch \
-        file://stblinux-2.6.18-fixed-brcmnand-buffer-overflow.patch \
-        file://stblinux-2.6.18-libata-revert-no-more-needed-change.patch \
-        file://stblinux-2.6.18-libata-hdd-spinup-workaround.patch \
-        file://kbuild-fix-make-incompatibility.patch \
-        file://0001-MIPS-Fix-possible-hang-in-LL-SC-futex-loops.patch \
-        file://0001-Add-support-for-FTDI-FT4232H-based-devices.patch \
-        file://0001-proc-mounts_poll-make-consistent-to-mdstat_poll.patch \
-        file://0001-fixed-broken-usb-with-gcc-4.6.x.patch \
-        file://linux-2.6.18-fix-serial.patch \
-        file://stblinux-2.6.18-hw-ecc-compatibility.patch \
-        file://linux-2.6.18-include-asm.patch \
-        file://linux-2.6.18-include-linux.patch \
-        file://linux-2.6.18-mod_devicetable_h.patch \
-        file://linux-2.6.18-3g-modems.patch \
-        file://mips_refactor_page_dev0.patch \
-        file://mkmakefile-make-3.82-fix-follow-bug-2323.patch \
+	${KERNELORG_MIRROR}/linux/kernel/v2.6/linux-${PV}.tar.bz2;name=kernel \
+	http://sources.dreamboxupdate.com/download/kernel-patches/${P}-${PATCHREV}.patch.bz2;name=patch \
+	http://download.filesystems.org/unionfs/unionfs-2.x/unionfs-2.5.11_for_${PV}.8.diff.gz;name=unionfs \
+	file://stblinux-${PV}-extra-version-7.4.patch \
+	file://stblinux-${PV}-brcmnand-oob-raw-write-fix.patch \
+	file://linux-${PV}-fix-mips-crosscompile.patch \
+	file://linux-${PV}-fix-proc-cputype.patch \
+	file://dvb-api-${PV}-5.3.patch \
+	file://linux-${PV}-dvb-core-headers-20100904.patch \
+	file://linux-${PV}-dvb-frontends-headers-20100904.patch \
+	file://stblinux-${PV}-fixed-brcmnand-buffer-overflow.patch \
+	file://stblinux-${PV}-libata-revert-no-more-needed-change.patch \
+	file://stblinux-${PV}-libata-hdd-spinup-workaround.patch \
+	file://kbuild-fix-make-incompatibility.patch \
+	file://0001-MIPS-Fix-possible-hang-in-LL-SC-futex-loops.patch \
+	file://0001-Add-support-for-FTDI-FT4232H-based-devices.patch \
+	file://0001-proc-mounts_poll-make-consistent-to-mdstat_poll.patch \
+	file://0001-fixed-broken-usb-with-gcc-4.6.x.patch \
+	file://linux-${PV}-fix-serial.patch \
+	file://stblinux-${PV}-hw-ecc-compatibility.patch \
+	file://linux-${PV}-include-asm.patch \
+	file://linux-${PV}-include-linux.patch \
+	file://linux-${PV}-mod_devicetable_h.patch \
+	file://linux-${PV}-3g-modems.patch \
+	file://mips_refactor_page_dev0.patch \
+	file://mkmakefile-make-3.82-fix-follow-bug-2323.patch \
 	file://mips-utimensat.patch \
-        file://mips-pps.patch \
+	file://mips-pps.patch \
 	file://vermagic.patch \
 	file://binutils-gcc6.patch \
 	file://kernel-gcc7.patch \
@@ -73,7 +74,7 @@ SRC_URI = " \
 	file://extra_ipv6_headers.patch \
 	file://dm-ioctl-add-data-to-struct.patch \
 	file://defconfig \
-"
+	"
 
 SRC_URI[kernel.md5sum] = "296a6d150d260144639c3664d127d174"
 SRC_URI[kernel.sha256sum] = "c95280ff6c5d2a17788f7cc582d23ae8a9a7ba3f202ec6e4238eaadfce7c163d"

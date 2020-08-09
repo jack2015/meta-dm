@@ -1,5 +1,7 @@
 # dreambox-mips32el-nf.inc
 
+KERNELVERSION = "2.6.18"
+
 BOX_BRAND = "dreambox"
 
 TARGET_ARCH = "mipsel"
@@ -39,13 +41,13 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 
 GLIBC_EXTRA_OECONF = "--with-tls --with-__thread"
 DVBMEDIASINK_CONFIG = "--with-dts=no"
-OLDEST_KERNEL = "2.6.18"
+OLDEST_KERNEL = "${KERNELVERSION}"
 GLIBCVERSION = "2.19"
 
 PREFERRED_VERSION_rtl8192cu = "3.3.0"
 PREFERRED_VERSION_libnl = "3.2.24"
-PREFERRED_VERSION_linux-dreambox = "2.6.18"
-PREFERRED_VERSION_linux-libc-headers = "2.6.18"
+PREFERRED_VERSION_linux-dreambox = "${KERNELVERSION}"
+PREFERRED_VERSION_linux-libc-headers = "${KERNELVERSION}"
 PREFERRED_VERSION_wpa-supplicant = "0.5.8"
 PREFERRED_VERSION_wscan = "20130331"
 
