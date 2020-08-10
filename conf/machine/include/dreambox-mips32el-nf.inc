@@ -16,20 +16,12 @@ MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
 
 OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	dreambox-dvb-modules-${MACHINE}	\
 	v4l-dvb-module-dvb-core	\
 	v4l-dvb-module-stv0299 \
-	firmware-rt73 \
-	firmware-rtl8712u \
-	firmware-zd1211 \
-	kernel-module-extrawlan-rtl871x \
-	kernel-module-extrawlan-rt73 \
-	kernel-module-zd1211rw \
 "
-
 
 MACHINE_EXTRA_RRECOMMENDS += "\
 	gstreamer1.0-plugin-dvbmediasink \
