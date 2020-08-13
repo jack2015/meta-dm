@@ -19,8 +19,8 @@ do_compile() {
 }
 
 do_install() {
-   install -d ${D}/lib
-   cp -fR ${S}/lib/* ${D}/lib/
+   install -d ${D}${base_libdir}
+   cp -fR ${S}${base_libdir}/* ${D}${base_libdir}/
 }
 
 PACKAGES = "v4l-dvb-modules ${PN}-tests"
