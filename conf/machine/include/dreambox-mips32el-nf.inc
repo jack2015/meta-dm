@@ -21,9 +21,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	dreambox-dvb-modules-${MACHINE}	\
 	v4l-dvb-module-dvb-core	\
 	v4l-dvb-module-stv0299 \
-"
-
-MACHINE_EXTRA_RRECOMMENDS += "\
 	gstreamer1.0-plugin-dvbmediasink \
 	kernel-module-hmac \
 	kernel-module-md4 \
