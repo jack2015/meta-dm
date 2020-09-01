@@ -1464,7 +1464,7 @@ CONFIG_SYSFS=y
 CONFIG_TMPFS=y
 # CONFIG_HUGETLB_PAGE is not set
 CONFIG_RAMFS=y
-CONFIG_CONFIGFS_FS=y
+# CONFIG_CONFIGFS_FS is not set
 
 #
 # Layered filesystems
