@@ -24,7 +24,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	gstreamer1.0-plugin-dvbmediasink \
 	kernel-module-hmac \
 	kernel-module-md4 \
-	kernel-module-ecb \
 	dreambox-boot-progress \
 	"
 
