@@ -18,13 +18,15 @@ OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	dreambox-dvb-modules-${MACHINE}	\
-	v4l-dvb-module-dvb-core	\
-	v4l-dvb-module-stv0299 \
+	dreambox-boot-progress \
+	dreambox-dvb-modules-${MACHINE} \
 	gstreamer1.0-plugin-dvbmediasink \
+	kernel-module-autofs4 \
+	kernel-module-fuse \
 	kernel-module-hmac \
 	kernel-module-md4 \
-	dreambox-boot-progress \
+	v4l-dvb-module-dvb-core \
+	v4l-dvb-module-stv0299 \
 	"
 
 GLIBC_EXTRA_OECONF = "--with-tls --with-__thread"

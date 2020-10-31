@@ -6,6 +6,8 @@ TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	kernel-module-autofs4 \
+	kernel-module-fuse \
 	libpagecache \
 	libpassthrough \
 	"
