@@ -23,7 +23,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	gstreamer1.0-plugin-dvbmediasink \
 	kernel-module-autofs4 \
 	kernel-module-fuse \
-	kernel-module-hmac \
 	kernel-module-md4 \
 	v4l-dvb-module-dvb-core \
 	v4l-dvb-module-stv0299 \
