@@ -11,10 +11,6 @@ PACKAGES_DYNAMIC = "kernel-*"
 # the kernel here, so that it is known that the kernel has them built in.
 KERNEL_BUILTIN_MODULES = "kernel-module-block2mtd"
 
-KERNEL_BUILTIN_MODULES_dm800se = "\
-	kernel-module-stv0299 \
-	"
-
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
