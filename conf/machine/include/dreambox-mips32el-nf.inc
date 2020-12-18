@@ -37,7 +37,6 @@ PREFERRED_VERSION_rtl8192cu = "3.3.0"
 PREFERRED_VERSION_libnl = "3.2.24"
 PREFERRED_VERSION_linux-dreambox = "${KERNELVERSION}"
 PREFERRED_VERSION_linux-libc-headers = "${KERNELVERSION}"
-PREFERRED_VERSION_wpa-supplicant = "0.5.8"
 PREFERRED_VERSION_wscan = "20130331"
 
 MACHINE_FEATURES += "alsa usbhost switchoff dreambox"
