@@ -26,7 +26,7 @@ SRC_URI[mips32el-nf-denzil.md5sum] = "143cb7253132af1ecd3aafa3679c6109"
 SRC_URI[mips32el-nf-denzil.sha256sum] = "53d2760e3aa19eab6e19edabe8b9dd840c693ca30c43495904241e52fd40ea32"
 
 do_install() {
-    cp -r * ${D}
+    cp -fr * ${D}
 }
 
 INHIBIT_PACKAGE_STRIP = "1"
