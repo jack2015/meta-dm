@@ -18,6 +18,9 @@ OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	dm-bootsplash \
+	dm-shutdown \
+	dm-startupfix \
 	dreambox-boot-progress \
 	dreambox-dvb-modules-${MACHINE} \
 	gstreamer1.0-plugin-dvbmediasink \
@@ -39,7 +42,7 @@ PREFERRED_VERSION_linux-dreambox = "${KERNELVERSION}"
 PREFERRED_VERSION_linux-libc-headers = "${KERNELVERSION}"
 PREFERRED_VERSION_wscan = "20130331"
 
-MACHINE_FEATURES += "alsa usbhost switchoff dreambox"
+MACHINE_FEATURES += "alsa usbhost switchoff dreambox oldkernel olde2api DVI"
 
 PREFERRED_PROVIDER_virtual/bootloader = "dreambox-secondstage-${MACHINE}"
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
@@ -58,3 +61,16 @@ DREAMBOX_BUILDIMAGE = "buildimage --arch ${MACHINE} ${EXTRA_BUILDCMD} \
 	--sector-size ${DREAMBOX_SECTOR_SIZE}"
 
 require conf/machine/include/tune-mips32.inc
+
+require conf/machine/include/dreambox-brcmnand.inc
+require conf/machine/include/dreambox-nand-64mb.inc
+require conf/machine/include/dreambox-part-64mb.inc
+require conf/machine/include/dreambox-jffs2.inc
+
+SOC_FAMILY = "bcm7401"
+DVBPROVIDER = "v4l-dvb"
+
+# Image fails to boot if kernel exceeds some unknown limit, so make that
+# explicit here. I don't know what the actual limit is, but 6416679 boots
+# and 6604470 didn't.
+KERNEL_IMAGE_MAXSIZE = "6500000"
