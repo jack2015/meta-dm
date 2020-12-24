@@ -1,6 +1,8 @@
 SUMMARY = "Utilities needed to do transponder blindscan with dreambox dvb receivers"
 LICENSE = "CLOSED"
 
+COMPATIBLE_MACHINE = "^(dm500hd|dm800|dm800se)$"
+
 PROVIDES += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 RPROVIDES_${PN} += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 
