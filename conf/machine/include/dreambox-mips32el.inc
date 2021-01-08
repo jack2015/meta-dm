@@ -7,8 +7,6 @@ DEFAULTTUNE = "mips32el"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	dm-bootsplash \
-	kernel-module-autofs4 \
-	kernel-module-fuse \
 	kernel-module-stv0299 \
 	libpagecache \
 	libpassthrough \
