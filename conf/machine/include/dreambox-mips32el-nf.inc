@@ -23,7 +23,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	dm-startupfix \
 	dreambox-boot-progress \
 	dreambox-dvb-modules-${MACHINE} \
-	gstreamer1.0-plugin-dvbmediasink \
 	kernel-module-md4 \
 	v4l-dvb-module-dvb-core \
 	v4l-dvb-module-stv0299 \

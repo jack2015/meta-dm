@@ -6,7 +6,6 @@ EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	dreambox-dvb-modules-${MACHINE} \
-	gstreamer1.0-plugin-dvbmediasink \
 	kernel-module-hmac \
 	kernel-module-md4 \
 	${@bb.utils.contains_any("MACHINE", "dm800se dm500hd", "kernel-module-ecb", "", d)} \
