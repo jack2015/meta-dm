@@ -25,10 +25,10 @@ KERNEL_IMAGEDEST = "boot"
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
-PKG_kernel-base = "kernel-base"
-PKG_kernel-image = "kernel-image"
-RPROVIDES_kernel-base = "kernel-${KERNEL_VERSION}"
-RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION} ${KERNEL_BUILTIN_MODULES}"
+PKG_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-base"
+PKG_${KERNEL_PACKAGE_NAME}-image = "${KERNEL_PACKAGE_NAME}-image"
+RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-${KERNEL_VERSION}"
+RPROVIDES_${KERNEL_PACKAGE_NAME}-image = "${KERNEL_PACKAGE_NAME}-image-${KERNEL_VERSION} ${KERNEL_BUILTIN_MODULES}"
 
 USB_ROOT = "/dev/sdb2"
 
@@ -148,7 +148,7 @@ do_package_qa() {
     exit 0
 }
 
-pkg_preinst_kernel-image() {
+pkg_preinst_${KERNEL_PACKAGE_NAME}-image() {
 	if [ -z "$D" ]
 	then
 		if mountpoint -q /${KERNEL_IMAGEDEST}
@@ -159,7 +159,7 @@ pkg_preinst_kernel-image() {
 		fi
 	fi
 }
-pkg_prerm_kernel-image() {
+pkg_prerm_${KERNEL_PACKAGE_NAME}-image() {
 	if [ -z "$D" ]
 	then
 		if mountpoint -q /${KERNEL_IMAGEDEST}
@@ -170,7 +170,7 @@ pkg_prerm_kernel-image() {
 		fi
 	fi
 }
-pkg_postinst_kernel-image() {
+pkg_postinst_${KERNEL_PACKAGE_NAME}-image() {
         if [ -z "$D" ] && mountpoint -q /${KERNEL_IMAGEDEST}; then
                 if grep -q '\<root=/dev/mtdblock3\>' /proc/cmdline && grep -q '\<root=ubi0:rootfs\>' /boot/autoexec.bat; then
                         sed -ie 's!${CMDLINE_UBI}!${CMDLINE_JFFS2}!' /boot/autoexec.bat;
@@ -178,7 +178,7 @@ pkg_postinst_kernel-image() {
                 umount /${KERNEL_IMAGEDEST};
         fi
 }
-pkg_postrm_kernel-image() {
+pkg_postrm_${KERNEL_PACKAGE_NAME}-image() {
 	if [ -z "$D" ]
 	then
 		umount /${KERNEL_IMAGEDEST}
@@ -191,5 +191,5 @@ pkg_postinst_kernel () {
 pkg_postrm_kernel () {
 }
 
-FILES_kernel-vmlinux += "boot/vmlinux-2.6.18-7.4-${MACHINE}.gz"
-FILES_kernel-image += "${KERNEL_IMAGEDEST}/autoexec*.bat"
+FILES_${KERNEL_PACKAGE_NAME}-vmlinux += "boot/vmlinux-2.6.18-7.4-${MACHINE}.gz"
+FILES_${KERNEL_PACKAGE_NAME}-image += "${KERNEL_IMAGEDEST}/autoexec*.bat"
