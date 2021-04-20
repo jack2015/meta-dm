@@ -41,7 +41,7 @@ PREFERRED_VERSION_linux-dreambox = "${KERNELVERSION}"
 PREFERRED_VERSION_linux-libc-headers = "${KERNELVERSION}"
 PREFERRED_VERSION_wscan = "20130331"
 
-MACHINE_FEATURES += "alsa usbhost switchoff dreambox oldkernel olde2api DVI"
+MACHINE_FEATURES += "alsa usbhost switchoff dreambox oldkernel olde2api DVI wifiusblegacy"
 
 PREFERRED_PROVIDER_virtual/bootloader = "dreambox-secondstage-${MACHINE}"
 PREFERRED_PROVIDER_virtual/kernel = "linux-dreambox"
