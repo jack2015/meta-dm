@@ -191,5 +191,5 @@ pkg_postinst_kernel () {
 pkg_postrm_kernel () {
 }
 
-FILES_${KERNEL_PACKAGE_NAME}-vmlinux += "boot/vmlinux-2.6.18-7.4-${MACHINE}.gz"
-FILES_${KERNEL_PACKAGE_NAME}-image += "${KERNEL_IMAGEDEST}/autoexec*.bat"
+FILES_kernel-vmlinux += "boot/vmlinux-2.6.18-7.4-${MACHINE}.gz"
+FILES_kernel-image += "${KERNEL_IMAGEDEST}/autoexec*.bat"

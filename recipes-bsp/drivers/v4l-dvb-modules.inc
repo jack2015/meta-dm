@@ -4,7 +4,7 @@ SECTION = "kernel/modules"
 require conf/license/openvision-gplv2.inc
 
 inherit module
-DEPENDS += "virtual/kernel"
+#DEPENDS += "virtual/kernel"
 
 COMPATIBLE_MACHINE = "^(dm800)$"
 
