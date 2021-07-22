@@ -28,6 +28,7 @@ require conf/machine/include/dreambox-nand-64mb.inc
 require conf/machine/include/dreambox-part-64mb.inc
 require conf/machine/include/dreambox-jffs2.inc
 
+PREFERRED_VERSION_wscan = "20130331"
 PREFERRED_VERSION_linux-dreambox = "${KERNELVERSION}"
 
 SOC_FAMILY = "bcm7405"
