@@ -3,10 +3,10 @@ HOMEPAGE = "http://linuxtv.org/"
 SECTION = "kernel/modules"
 require conf/license/openvision-gplv2.inc
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit module
 #DEPENDS += "virtual/kernel"
-
-COMPATIBLE_MACHINE = "^(dm800)$"
 
 INHIBIT_PACKAGE_STRIP = "1"
 
@@ -19,8 +19,8 @@ do_compile() {
 }
 
 do_install() {
-   install -d ${D}${base_libdir}
-   cp -fR ${S}${base_libdir}/* ${D}${base_libdir}/
+	install -d ${D}${base_libdir}
+	cp -fR ${S}${base_libdir}/* ${D}${base_libdir}/
 }
 
 PACKAGES = "v4l-dvb-modules ${PN}-tests"
@@ -28,9 +28,9 @@ FILES_${PN} = ""
 ALLOW_EMPTY_${PN} = "1"
 
 FILES_${PN}-tests += "\
-    /lib/firmware/* \
-    ${nonarch_base_libdir}/modules/*/modules.* \
-    "
+	${nonarch_base_libdir}/firmware/* \
+	${nonarch_base_libdir}/modules/*/modules.* \
+	"
 
 pkg_postinst_modules() {
 #!/bin/sh

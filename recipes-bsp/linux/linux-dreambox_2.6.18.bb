@@ -159,6 +159,7 @@ pkg_preinst_${KERNEL_PACKAGE_NAME}-image() {
 		fi
 	fi
 }
+
 pkg_prerm_${KERNEL_PACKAGE_NAME}-image() {
 	if [ -z "$D" ]
 	then
@@ -170,6 +171,7 @@ pkg_prerm_${KERNEL_PACKAGE_NAME}-image() {
 		fi
 	fi
 }
+
 pkg_postinst_${KERNEL_PACKAGE_NAME}-image() {
         if [ -z "$D" ] && mountpoint -q /${KERNEL_IMAGEDEST}; then
                 if grep -q '\<root=/dev/mtdblock3\>' /proc/cmdline && grep -q '\<root=ubi0:rootfs\>' /boot/autoexec.bat; then
@@ -178,6 +180,7 @@ pkg_postinst_${KERNEL_PACKAGE_NAME}-image() {
                 umount /${KERNEL_IMAGEDEST};
         fi
 }
+
 pkg_postrm_${KERNEL_PACKAGE_NAME}-image() {
 	if [ -z "$D" ]
 	then
@@ -188,6 +191,7 @@ pkg_postrm_${KERNEL_PACKAGE_NAME}-image() {
 # Do not use update-alternatives!
 pkg_postinst_kernel () {
 }
+
 pkg_postrm_kernel () {
 }
 

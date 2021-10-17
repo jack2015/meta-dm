@@ -21,11 +21,11 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}${sysconfdir}/modules-load.d
-    install -m 0644 ${WORKDIR}/modules ${D}${sysconfdir}/modules-load.d/${PN}.conf
-    install -d ${D}${nonarch_base_libdir}/modules/${DM_LOCALVERSION}/extra
-    install -m 0644 ${WORKDIR}/LICENSE ${D}${nonarch_base_libdir}/modules/${DM_LOCALVERSION}/extra
-    install -m 0644 ${WORKDIR}/*.ko ${D}${nonarch_base_libdir}/modules/${DM_LOCALVERSION}/extra
+	install -d ${D}${sysconfdir}/modules-load.d
+	install -m 0644 ${WORKDIR}/modules ${D}${sysconfdir}/modules-load.d/${PN}.conf
+	install -d ${D}${nonarch_base_libdir}/modules/${DM_LOCALVERSION}/extra
+	install -m 0644 ${WORKDIR}/LICENSE ${D}${nonarch_base_libdir}/modules/${DM_LOCALVERSION}/extra
+	install -m 0644 ${WORKDIR}/*.ko ${D}${nonarch_base_libdir}/modules/${DM_LOCALVERSION}/extra
 }
 
 PACKAGES = "${PN}"

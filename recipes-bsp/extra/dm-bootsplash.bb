@@ -23,15 +23,15 @@ SRC_URI[dm800se.md5sum] = "3413a894a3d77e02cae34b96d302817d"
 SRC_URI[dm800se.sha256sum] = "8a283442c231e82ee1a2093e53dc5bf52c478e12d22c79af7e7026b52711fc9c"
 
 do_install() {
-    install -d ${D}/boot
-    install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
-    install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.jpg ${D}/boot/
+	install -d ${D}/boot
+	install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
+	install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.jpg ${D}/boot/
 }
 
 do_install_dm800() {
-    install -d ${D}/boot
-    install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
-    install -m 0755 ${S}/dm800-logo.jpg ${D}/boot/bootlogo-${MACHINE}.jpg
+	install -d ${D}/boot
+	install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
+	install -m 0755 ${S}/dm800-logo.jpg ${D}/boot/bootlogo-${MACHINE}.jpg
 }
 
 inherit deploy
