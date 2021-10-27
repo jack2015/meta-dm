@@ -73,3 +73,5 @@ DVBPROVIDER = "v4l-dvb"
 # explicit here. I don't know what the actual limit is, but 6416679 boots
 # and 6604470 didn't.
 KERNEL_IMAGE_MAXSIZE = "6500000"
+
+CFLAGS_append_pn-titan = " -DDREAMBOX "

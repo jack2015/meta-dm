@@ -39,3 +39,5 @@ SOC_FAMILY = "bcm7405"
 KERNEL_IMAGE_MAXSIZE = "6500000"
 
 MACHINE_FEATURES += "fan hdmicec HDMI"
+
+CFLAGS_append_pn-titan = " -DDREAMBOX "
