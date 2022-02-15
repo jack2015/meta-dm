@@ -41,3 +41,6 @@ KERNEL_IMAGE_MAXSIZE = "6500000"
 MACHINE_FEATURES += "fan hdmicec HDMI"
 
 CFLAGS_append_pn-titan = " -DDREAMBOX "
+
+KERNEL_FILE = "kernel.bin"
+ROOTFS_FILE = "rootfs.bin"
