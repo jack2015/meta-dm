@@ -7,7 +7,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "dreambox-buildimage-native"
 DATE = "${@time.strftime('%Y%m%d',time.gmtime())}"
 
-inherit deploy
+inherit deploy preserve_binary
 
 do_configure[nostamp] = "1"
 

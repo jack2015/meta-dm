@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit module
 #DEPENDS += "virtual/kernel"
 
-INHIBIT_PACKAGE_STRIP = "1"
+inherit preserve_binary
 
 PACKAGES_DYNAMIC += "v4l-dvb-module-*"
 
