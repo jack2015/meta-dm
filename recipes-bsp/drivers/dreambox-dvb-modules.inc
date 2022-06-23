@@ -13,7 +13,7 @@ SRC_URI = " \
 	file://modules \
 	"
 
-inherit module-base preserve_binary
+inherit module-base preserve_binary driverdeploy
 
 do_compile() {
 }
@@ -38,3 +38,5 @@ DRIVERDATE = "${@'${PV}'.split('-')[-1]}"
 FILESEXTRAPATHS_prepend := "${THISDIR}/dreambox-dvb-modules:"
 
 FILES_${PN} += "${sysconfdir}/modules-load.d/${PN}.conf ${nonarch_base_libdir}/modules/${DM_LOCALVERSION}/extra"
+
+
