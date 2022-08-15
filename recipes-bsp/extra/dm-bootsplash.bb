@@ -13,7 +13,7 @@ S = "${WORKDIR}"
 
 SRC_URI = "http://dreamboxupdate.com/download/opendreambox/2.0.0/dreambox-bootlogo/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}.tar.bz2;name=${MACHINE}"
 
-SRC_URI_append_dm800 = " file://dm800-logo.jpg"
+SRC_URI_append = " file://ov.jpg"
 
 SRC_URI[dm500hd.md5sum] = "b9ada70304ca1f9a8e36a55bd38834c6"
 SRC_URI[dm500hd.sha256sum] = "d4b0f650711d5d6fdecb42efe9e13987ef803cba829d0950e899608a784ae3b2"
@@ -25,13 +25,7 @@ SRC_URI[dm800se.sha256sum] = "8a283442c231e82ee1a2093e53dc5bf52c478e12d22c79af7e
 do_install() {
 	install -d ${D}/boot
 	install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
-	install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.jpg ${D}/boot/
-}
-
-do_install_dm800() {
-	install -d ${D}/boot
-	install -m 0755 ${S}/dreambox-bootlogo_${BINARY_VERSION}_${MACHINE}/bootlogo-${MACHINE}.elf.gz ${D}/boot/
-	install -m 0755 ${S}/dm800-logo.jpg ${D}/boot/bootlogo-${MACHINE}.jpg
+	install -m 0755 ${S}/ov.jpg ${D}/boot/bootlogo-${MACHINE}.jpg
 }
 
 inherit deploy
