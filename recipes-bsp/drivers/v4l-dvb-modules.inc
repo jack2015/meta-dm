@@ -12,11 +12,8 @@ inherit preserve_binary
 
 PACKAGES_DYNAMIC += "v4l-dvb-module-*"
 
-do_configure() {
-}
-
-do_compile() {
-}
+do_configure[noexec] = "1"
+do_compile[noexec] = "1"
 
 do_install() {
 	install -d ${D}${base_libdir}

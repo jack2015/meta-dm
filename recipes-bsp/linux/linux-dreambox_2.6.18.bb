@@ -137,15 +137,10 @@ do_install_append() {
 # the kernel here, so that it is known that the kernel has them built in.
 KERNEL_BUILTIN_MODULES = ""
 
-do_rm_work() {
-}
+do_rm_work[noexec] = "1"
 
 do_install_prepend() {
 	mkdir -p ${S}/tools
-}
-
-do_package_qa() {
-    exit 0
 }
 
 pkg_preinst_${KERNEL_PACKAGE_NAME}-image() {

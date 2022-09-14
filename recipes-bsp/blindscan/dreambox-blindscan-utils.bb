@@ -8,8 +8,6 @@ COMPATIBLE_MACHINE = "^(dm500hd|dm800|dm800se)$"
 PROVIDES += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 RPROVIDES_${PN} += "virtual/blindscan-dvbs virtual/blindscan-dvbc"
 
-DEPENDS = "ncurses"
-
 inherit preserve_binary
 
 PV = "1.12"
@@ -34,3 +32,5 @@ SRC_URI[mips32el-nf-denzil.sha256sum] = "53d2760e3aa19eab6e19edabe8b9dd840c693ca
 do_install() {
 	cp -fr * ${D}
 }
+
+do_compile[noexec] = "1"
