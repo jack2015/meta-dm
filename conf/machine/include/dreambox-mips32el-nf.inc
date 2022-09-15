@@ -17,12 +17,13 @@ MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
 OPTIONAL_BSP_PACKAGES += "dreambox-buildimage"
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "dreambox-dvb-modules-${MACHINE}"
+
+MACHINE_EXTRA_RDEPENDS += "\
 	dm-bootsplash \
 	dm-shutdown \
 	dm-startupfix \
 	dreambox-boot-progress \
-	dreambox-dvb-modules-${MACHINE} \
 	kernel-module-md4 \
 	v4l-dvb-module-dvb-core \
 	v4l-dvb-module-stv0299 \

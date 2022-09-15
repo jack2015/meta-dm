@@ -5,12 +5,12 @@ BOX_BRAND = "dreambox"
 TARGET_ARCH = "mipsel"
 DEFAULTTUNE = "mips32el"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+MACHINE_EXTRA_RDEPENDS += "\
 	dm-bootsplash \
 	kernel-module-stv0299 \
-	libpagecache \
-	libpassthrough \
 	"
+
+IMAGE_INSTALL += "libpagecache libpassthrough"
 
 MTD_KERNEL = "mtd2"
 

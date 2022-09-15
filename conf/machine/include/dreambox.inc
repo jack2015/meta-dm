@@ -4,12 +4,13 @@ MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
 
 EXTRA_IMAGEDEPENDS += "dreambox-secondstage-${MACHINE}"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	dreambox-dvb-modules-${MACHINE} \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "dreambox-dvb-modules-${MACHINE}"
+
+MACHINE_EXTRA_RDEPENDS += "\
+	dreambox-boot-progress \
+	${@bb.utils.contains_any("MACHINE", "dm800se dm500hd", "kernel-module-ecb", "", d)} \
 	kernel-module-hmac \
 	kernel-module-md4 \
-	${@bb.utils.contains_any("MACHINE", "dm800se dm500hd", "kernel-module-ecb", "", d)} \
-	dreambox-boot-progress \
 	"
 
 MACHINE_FEATURES += "alsa usbhost switchoff dreambox"
