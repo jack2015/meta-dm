@@ -10,8 +10,6 @@ MACHINE_EXTRA_RDEPENDS += "\
 	kernel-module-stv0299 \
 	"
 
-IMAGE_INSTALL += "libpagecache libpassthrough"
-
 MTD_KERNEL = "mtd2"
 
 require conf/machine/include/dreambox.inc
@@ -38,7 +36,7 @@ SOC_FAMILY = "bcm7405"
 # and 6604470 didn't.
 KERNEL_IMAGE_MAXSIZE = "6500000"
 
-MACHINE_FEATURES += "fan hdmicec HDMI"
+MACHINE_FEATURES += "fan hdmicec HDMI dreamboxlib"
 
 CFLAGS_append_pn-titan = " -DDREAMBOX "
 
